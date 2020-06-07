@@ -10,6 +10,6 @@ switch (command) {
     shell.exec('./terragrunt-init.js')
     break;
   case "plan":
-    shell.exec('./terragrunt-plan.js')
+    shell.exec('./tg-action/terragrunt-plan.js')
     break;
 }
