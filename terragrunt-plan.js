@@ -10,9 +10,9 @@
  */
 
 const shell = require('shelljs');
-const path = require('path');
-const glob = require('@actions/glob');
-const core = require('@actions/core');
+const path  = require('path');
+const glob  = require('@actions/glob');
+const core  = require('@actions/core');
 
 /**
  * Promisifies shelljs.exec

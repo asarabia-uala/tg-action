@@ -27,4 +27,4 @@ outputs:
     description: 'The Terragrunt plan output.'
 runs:
   using: 'node12'
-  main: 'index.js'
+  main: 'terragrunt-plan.js'
