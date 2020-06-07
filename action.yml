@@ -1,0 +1,30 @@
+name: 'Terragrunt GitHub Actions'
+description: 'Runs Terragrunt commands via GitHub Actions.'
+author:  'HashiCorp, Inc. Terraform Team <terraform@hashicorp.com>'
+branding:
+  icon: 'cloud'
+  color: 'purple'
+inputs:
+  tf_actions_subcommand:
+    description: 'Terraform or Terragrunt subcommand to execute.'
+    required: true
+  tg_actions_version:
+    description: 'Terragrunt version to install.'
+    required: true
+    default: 'latest'
+  tf_actions_comment:
+    description: 'Whether or not to comment on pull requests.'
+    default: true
+  tf_actions_working_dir:
+    description: 'Terragrunt working directory.'
+    default: '.'
+outputs:
+  tf_actions_output:
+    description: 'The Terragrunt outputs in JSON format.'
+  tf_actions_plan_has_changes:
+    description: 'Whether or not the Terragrunt plan contained changes.'
+  tf_actions_plan_output:
+    description: 'The Terragrunt plan output.'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
