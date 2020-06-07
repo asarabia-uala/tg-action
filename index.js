@@ -10,6 +10,7 @@ switch (command) {
     shell.exec('./terragrunt-init.js')
     break;
   case "plan":
+    shell.exec('sudo chmod +x ./tg-action/terragrunt-plan.js')
     shell.exec('./tg-action/terragrunt-plan.js')
     break;
 }
