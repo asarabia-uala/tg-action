@@ -1,3 +1,14 @@
+/**
+ * Wrapper around terragrunt to display output succinctly on Atlantis.
+ *
+ * Terragrunt is notoriously verbose, which can cause Atlantis to output
+ * hundreds of comments on single PRs, which can be annoying.
+ *
+ * This script will output just the final plan for resources to update on
+ * successful terragrunt runs, but will output all terragrunt output on
+ * errors.
+ */
+
 const shell = require('shelljs');
 const path = require('path');
 const glob = require('@actions/glob');
