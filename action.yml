@@ -1,13 +1,13 @@
-name: 'Terragrunt GitHub Actions'
-description: 'Runs Terragrunt commands via GitHub Actions.'
-author:  'HashiCorp, Inc. Terraform Team <terraform@hashicorp.com>'
-branding:
-  icon: 'cloud'
-  color: 'purple'
+name: 'Terragrunt Command'
+description: 'Run Terragrunt With Input Command'
 inputs:
-  path-to-hcl:
-    description: 'Terragrunt working directory.'
+  path-to-hcl:  # id of input
+    description: 'Path where run terragrunt'
+    required: true
     default: '.'
+outputs:
+  full-output: # id of output
+    description: 'File with full terragrun output'
 runs:
   using: 'node12'
   main: 'terragrunt-plan.js'
