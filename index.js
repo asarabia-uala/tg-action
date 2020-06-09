@@ -8,6 +8,25 @@ try{
 
     let tgplan = child_process.execSync("terragrunt plan-all --terragrunt-non-interactive --terragrunt-source-update --terragrunt-include-external-dependencies -lock=false -out plan.out", {cwd: dir });
 
+    const myToken = core.getInput('myToken');
+    const octokit = github.getOctokit(myToken)
+  
+    const context = github.context;
+    if (context.payload.pull_request == null) {
+        core.setFailed('No pull request found.');
+        return;
+    }
+          
+    const pull_request_number = context.payload.pull_request.number;
+      
+    const new_comment = octokit.issues.createComment({
+        ...context.repo,
+        issue_number: pull_request_number,
+        body: tgplan
+    });
+      
+    
+
 } catch (error) {
     core.setFailed(error.message);
 }
