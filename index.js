@@ -6,7 +6,7 @@ try{
     
     const dir = core.getInput('path-to-hcl');
 
-    const tgplan = child_process.execSync("terragrunt plan",{encoding: "utf8", cwd: dir });
+    const tgplan = child_process.execSync("terragrunt plan -out json",{encoding: "utf8", cwd: dir });
 
     const myToken = core.getInput('github_token');
     const octokit = github.getOctokit(myToken)
