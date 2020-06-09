@@ -10,4 +10,4 @@ outputs:
     description: 'File with full terragrun output'
 runs:
   using: 'node12'
-  main: 'terragrunt-plan.js'
+  main: 'index.js'
