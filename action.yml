@@ -5,6 +5,8 @@ inputs:
     description: 'Path where run terragrunt'
     required: true
     default: '.'
+  github_token:  
+    required: true
 outputs:
   full-output: # id of output
     description: 'File with full terragrun output'

@@ -8,7 +8,7 @@ try{
 
     let tgplan = child_process.execSync("terragrunt plan-all --terragrunt-non-interactive --terragrunt-source-update --terragrunt-include-external-dependencies -lock=false -out plan.out", {cwd: dir });
 
-    const myToken = core.getInput('myToken');
+    const myToken = core.getInput('github_token');
     const octokit = github.getOctokit(myToken)
   
     const context = github.context;
