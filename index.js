@@ -13,6 +13,7 @@ try{
     tgplan = tgplan.replace(/^  \+/g,"\+");
     tgplan = tgplan.replace(/^  ~/g,"~");
     tgplan = tgplan.replace(/^  -/g,"-");
+    tgplan = tgplan.replace(/[^\w\s]/gi, '');
 
     const myToken = core.getInput('github_token');
     const octokit = github.getOctokit(myToken)
