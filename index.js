@@ -9,6 +9,8 @@ try{
     let tgplan = child_process.execSync("terragrunt plan -out json",{encoding: "utf8", cwd: dir });
 
     tgplan = tgplan.replace(/^  \+/g,"\+");
+    tgplan = tgplan.replace(/^  ~/g,"~");
+    tgplan = tgplan.replace(/^  -/g,"-");
 
     const myToken = core.getInput('github_token');
     const octokit = github.getOctokit(myToken)
