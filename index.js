@@ -8,7 +8,7 @@ try{
 
     let tgplan = child_process.execSync("terragrunt plan",{encoding: "utf8", cwd: dir });
 
-    print(tgplan);
+    console.log(tgplan);
 
     tgplan = tgplan.replace(/^  \+/g,"\+");
     tgplan = tgplan.replace(/^  ~/g,"~");
