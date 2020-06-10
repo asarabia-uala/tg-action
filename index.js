@@ -6,7 +6,9 @@ try{
     
     const dir = core.getInput('path-to-hcl');
 
-    let tgplan = child_process.execSync("terragrunt plan -out json",{encoding: "utf8", cwd: dir });
+    let tgplan = child_process.execSync("terragrunt plan",{encoding: "utf8", cwd: dir });
+
+    print(tgplan);
 
     tgplan = tgplan.replace(/^  \+/g,"\+");
     tgplan = tgplan.replace(/^  ~/g,"~");
