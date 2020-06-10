@@ -14,6 +14,7 @@ try{
     tgplan = tgplan.replace(/^  ~/g,"~");
     tgplan = tgplan.replace(/^  -/g,"-");
     tgplan = tgplan.replace(/[^\x20-\x7E]/g, '');
+    tgplan = tgplan.replace(/\x1b\[[0-9;]*m/g, '');
 
     const myToken = core.getInput('github_token');
     const octokit = github.getOctokit(myToken)
