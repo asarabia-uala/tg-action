@@ -10,12 +10,8 @@ try{
 
     console.log(tgplan);
 
-    tgplan = tgplan.replace(/^  \+/g,"\+");
-    tgplan = tgplan.replace(/^  ~/g,"~");
-    tgplan = tgplan.replace(/^  -/g,"-");
-    tgplan = tgplan.replace(/[^\x20-\x7E]/g, '');
-    tgplan = tgplan.replace(/\x1b\[[0-9;]*m/g, '');
-
+    tgplan = tgplan.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,'');
+  
     const myToken = core.getInput('github_token');
     const octokit = github.getOctokit(myToken)
   
