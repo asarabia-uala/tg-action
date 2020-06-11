@@ -14,9 +14,9 @@ try{
     tgplan = tgplan.replace(/No changes. Infrastructure is up-to-date./g,"+ No changes. Infrastructure is up-to-date.");
     tgplan = tgplan.replace(/Refreshing state.../g," ");
    
-    tgplan = tgplan.replace(/  -/g,"-");
-    tgplan = tgplan.replace(/  +/g,"+");
-    tgplan = tgplan.replace(/  ~/g,"!");
+    tgplan = tgplan.replace(/\  \-/g,"-");
+    tgplan = tgplan.replace(/\  \+/g,"+");
+    tgplan = tgplan.replace(/\  \~/g,"!");
 
 
     tgplan = "```diff\n".concat(tgplan).concat("```");
