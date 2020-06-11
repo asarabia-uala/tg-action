@@ -9,7 +9,7 @@ function formatPlan(planOutput){
     planOutput = planOutput.replace(/\  \+/g,"+");
     planOutput = planOutput.replace(/\  \~/g,"!");
     planOutput = planOutput.replace(/----/g,"####");
-    planOutput = "```diff\n".concat(tgplan).concat("```");
+    planOutput = "```diff\n".concat(planOutput).concat("```");
 
     return  planOutput;
 }
