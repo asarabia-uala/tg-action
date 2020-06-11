@@ -15,7 +15,7 @@ try{
  
     tgplan = tgplan.replace(" -","-");
     tgplan = tgplan.replace(" +","+");
-    tgplan = tgplan.replace(" ~","~");
+    tgplan = tgplan.replace(" ~","!");
 
     tgplan = "```diff\n".concat(tgplan).concat("```");
   
