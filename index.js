@@ -8,21 +8,7 @@ try{
 
     let tgplan = child_process.execSync("terragrunt plan",{encoding: "utf8", cwd: dir });
 
-    console.log(tgplan);
-
-    tgplan = tgplan.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,'');
-    tgplan = tgplan.replace(/No changes. Infrastructure is up-to-date./g,"+ No changes. Infrastructure is up-to-date.");
-    tgplan = tgplan.replace(/Refreshing state... /g,"");
-   
-    tgplan = tgplan.replace(/\  \-/g,"-");
-    tgplan = tgplan.replace(/\  \+/g,"+");
-    tgplan = tgplan.replace(/\  \~/g,"!");
-
-    tgplan = tgplan.replace(/----/g,"####");
-
-
-
-    tgplan = "```diff\n".concat(tgplan).concat("```");
+    tgplan = formatPlan(tgplan);
   
     const myToken = core.getInput('github_token');
     const octokit = github.getOctokit(myToken)
@@ -45,6 +31,19 @@ try{
 
 } catch (error) {
     core.setFailed(error.message);
+}
+
+function formatPlan(planOutput){
+    planOutput = planOutput.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,'');
+    planOutput = planOutput.replace(/No changes. Infrastructure is up-to-date./g,"+ No changes. Infrastructure is up-to-date.");
+    planOutput = planOutput.replace(/Refreshing state... /g,"");
+    planOutput = planOutput.replace(/\  \-/g,"-");
+    planOutput = planOutput.replace(/\  \+/g,"+");
+    planOutput = planOutput.replace(/\  \~/g,"!");
+    planOutput = planOutput.replace(/----/g,"####");
+    planOutput = "```diff\n".concat(tgplan).concat("```");
+
+    return  planOutput;
 }
 
 
