@@ -18,7 +18,7 @@ try{
     tgplan = tgplan.replace(/\  \+/g,"+");
     tgplan = tgplan.replace(/\  \~/g,"!");
 
-    tgplan = tgplan.replace(/----------/g,"##########");
+    tgplan = tgplan.replace(/----/g,"####");
 
 
 
