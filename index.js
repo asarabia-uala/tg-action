@@ -13,12 +13,12 @@ try{
     //tgplan = tgplan.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,'');
     //tgplan = tgplan.replace(/No changes. Infrastructure is up-to-date./g,"+ No changes. Infrastructure is up-to-date.");
  
-    tgplan = tgplan.replace(/(?m)^ {2}\-/g,"-");
-    tgplan = tgplan.replace(/(?m)^ {2}\+/g,"+");
-    tgplan = tgplan.replace(/(?m)^ {2}\~/g,"~");
-    tgplan = tgplan.replace("  -","-");
-    tgplan = tgplan.replace("  +","+");
-    tgplan = tgplan.replace("  ~","~");
+    // tgplan = tgplan.replace(/(?m)^ {2}\-/g,"-");
+    // tgplan = tgplan.replace(/(?m)^ {2}\+/g,"+");
+    // tgplan = tgplan.replace(/(?m)^ {2}\~/g,"~");
+    tgplan = tgplan.replace("   -","-");
+    tgplan = tgplan.replace("   +","+");
+    tgplan = tgplan.replace("   ~","~");
     
 
 
