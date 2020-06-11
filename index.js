@@ -12,6 +12,8 @@ try{
 
     tgplan = tgplan.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,'');
     tgplan = tgplan.replace(/No changes. Infrastructure is up-to-date./g,"```diff\n+ No changes. Infrastructure is up-to-date.\n ```");
+    tgplan = tgplan.replace(/-/g,"--");
+    tgplan = "```diff\n".concat(tgplan).concat("```");
   
     const myToken = core.getInput('github_token');
     const octokit = github.getOctokit(myToken)
