@@ -1,9 +1,8 @@
-const core          = require('@actions/core');
-
-import {runPlan} from './utils/tgPlan.js';
+const core      = require('@actions/core');
+const tgplan    = require('./utils/tgplan.js')     
 
 try{
-      runPlan();
+    tgplan.runPlan();
     
 } catch (error) {
     core.setFailed(error.message);

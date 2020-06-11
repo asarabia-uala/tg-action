@@ -1,8 +1,6 @@
 const core          = require('@actions/core');
 const github        = require('@actions/github');
 
-export { formatPlan, ghComment };
-
 function formatPlan(planOutput){
     planOutput = planOutput.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,'');
     planOutput = planOutput.replace(/No changes. Infrastructure is up-to-date./g,"+ No changes. Infrastructure is up-to-date.");
@@ -34,3 +32,8 @@ function ghComment(tgOutput){
         body: tgOutput
     });
 }
+
+module.exports = {
+    formatPlan,
+    ghComment
+};
