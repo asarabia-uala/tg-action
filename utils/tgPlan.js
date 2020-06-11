@@ -1,6 +1,6 @@
 const core          = require('@actions/core');
 const child_process = require('child_process');
-import {formatPlan, ghComment} from '/utils/utils.js';
+import {formatPlan, ghComment} from 'utils.js';
 export { runPlan };
 
 function runPlan(){
