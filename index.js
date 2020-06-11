@@ -1,5 +1,5 @@
 const core      = require('@actions/core');
-const tgplan    = require('./tgplan.js')     
+const tgplan    = require('../utils/tgplan.js')     
 
 try{
     tgplan.runPlan();
