@@ -1,7 +1,7 @@
 const core          = require('@actions/core');
-const github        = require('@actions/github');
 const child_process = require('child_process');
 import {formatPlan, ghComment} from '/utils/utils.js';
+export { runPlan };
 
 function runPlan(){
     const dir = core.getInput('path-to-hcl');
