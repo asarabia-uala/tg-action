@@ -1,6 +1,6 @@
 const core          = require('@actions/core');
 const child_process = require('child_process');
-const utils         = require('./tgplan.js');
+const utils         = require('./utils.js');
 
 function runPlan(){
     const dir = core.getInput('path-to-hcl');
