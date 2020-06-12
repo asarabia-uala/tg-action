@@ -12,7 +12,7 @@ const client = new GitHub(GITHUB_TOKEN);
 
 switch (body) {
     case "@Plan":
-        tgplan.runPlan();
+        //tgplan.runPlan();
         await client.reactions.createForIssueComment({
             owner,
             repo,
