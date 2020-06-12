@@ -6,6 +6,8 @@ try{
 
     const context = github.context;
 
+    console.log(context);
+
     switch (context.eventName) {
         case "issue_comment":
 
