@@ -9,7 +9,7 @@ try{
     console.log(context);
 
     switch (context.eventName) {
-        case "issue_comment":
+        case "pull_request_review":
 
             const new_comment = octokit.issues.createComment({
                 ...context.repo,
