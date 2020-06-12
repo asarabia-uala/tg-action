@@ -1,17 +1,18 @@
 const core      = require('@actions/core');
 const tgplan    = require('./utils/tgplan');
-const { context, GitHub } = require("@actions/github");
+const github = require("@actions/github");
 
 try{
 
+    const context = github.context;
+
     switch (context.eventName) {
         case "issue_comment":
-            //
-            await client.reactions.createForIssueComment({
-                owner,
-                repo,
-                comment_id: context.payload.comment.id,
-                content: "eyes"
+
+            const new_comment = octokit.issues.createComment({
+                ...context.repo,
+                issue_number: pull_request_number,
+                body: "Apply 🚀"
             });
             break;
         case "@Apply":
