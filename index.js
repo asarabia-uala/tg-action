@@ -6,10 +6,16 @@ try{
 
     const context = github.context;
 
-    console.log(context);
-
     switch (context.eventName) {
         case "pull_request_review":
+            const myToken = core.getInput('github_token');
+            const octokit = github.getOctokit(myToken)
+
+            const context = github.context;
+            if (context.payload.pull_request == null) {
+                core.setFailed('No pull request found.');
+                return;
+             }
 
             const new_comment = octokit.issues.createComment({
                 ...context.repo,
