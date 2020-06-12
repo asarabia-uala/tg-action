@@ -16,6 +16,8 @@ try{
                 core.setFailed('No pull request found.');
                 return;
              }
+             
+            const pull_request_number = context.payload.pull_request.number;
 
             const new_comment = octokit.issues.createComment({
                 ...context.repo,
