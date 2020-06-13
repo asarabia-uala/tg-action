@@ -34,6 +34,6 @@ function ghComment(tgOutput){
 }
 
 module.exports = {
-    formatPlan,
+    formatOutput,
     ghComment
 };

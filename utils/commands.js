@@ -15,7 +15,7 @@ function runCmd(command){
             break;
     }
 
-    cmdout = utils.formatPlan(cmdout);
+    cmdout = utils.formatOutput(cmdout);
     utils.ghComment(cmdout);
 }
 
