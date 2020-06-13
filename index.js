@@ -4,7 +4,7 @@ const github    = require("@actions/github");
 
 try{
   
-    if(core.getInput('comment') === true){
+    if(core.getInput('comment') == 'true'){
         comment();
     }else{
         const context = github.context;
