@@ -22,7 +22,7 @@ try{
             const new_comment = octokit.issues.createComment({
                 ...context.repo,
                 issue_number: pull_request_number,
-                body: "Deploying Terraform Code, wait for the results... 🚀\n ![](http://www.gifbay.com/gif/homer_on_sunday-75292)"
+                body: "Deploying Terraform Code, wait for the results... 🚀\n\n ![](http://www.gifbay.com/gif/homer_on_sunday-75292)"
             });
             break;
         case "@Apply":
