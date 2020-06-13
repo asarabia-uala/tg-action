@@ -7,6 +7,8 @@ inputs:
     default: '.'
   github_token:  
     required: true
+  comment:
+    required: false
 outputs:
   full-output: # id of output
     description: 'File with full terragrun output'

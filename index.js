@@ -4,6 +4,11 @@ const github    = require("@actions/github");
 
 try{
 
+    if(core.getInput('github_token')){
+        comment();
+        break;
+    }
+
     const context = github.context;
 
     switch (context.eventName) {
