@@ -1,5 +1,5 @@
 const core      = require('@actions/core');
-const tgplan    = require('./utils/tgplan');
+const command   = require('./utils/commands');
 const github    = require("@actions/github");
 const utils     = require('./utils/utils');
 
@@ -20,10 +20,10 @@ try{
 
         switch (context.eventName) {
             case "pull_request_review":
-                tgplan.runPlan();
+                command.runCmd("plan");
                 break;
             case "pull_request":
-                tgplan.runPlan();
+                command.runCmd("plan");
                 break;
         }
     }

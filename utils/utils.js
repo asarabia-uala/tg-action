@@ -1,17 +1,17 @@
 const core          = require('@actions/core');
 const github        = require('@actions/github');
 
-function formatPlan(planOutput){
-    planOutput = planOutput.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,'');
-    planOutput = planOutput.replace(/No changes. Infrastructure is up-to-date./g,"+ No changes. Infrastructure is up-to-date.");
-    planOutput = planOutput.replace(/Refreshing state... /g,"");
-    planOutput = planOutput.replace(/\  \-/g,"-");
-    planOutput = planOutput.replace(/\  \+/g,"+");
-    planOutput = planOutput.replace(/\  \~/g,"!");
-    planOutput = planOutput.replace(/----/g,"####");
-    planOutput = "```diff\n".concat(planOutput).concat("```");
+function formatOutput(output){
+    output = output.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,'');
+    output = output.replace(/No changes. Infrastructure is up-to-date./g,"+ No changes. Infrastructure is up-to-date.");
+    output = output.replace(/Refreshing state... /g,"");
+    output = output.replace(/\  \-/g,"-");
+    output = output.replace(/\  \+/g,"+");
+    output = output.replace(/\  \~/g,"!");
+    output = output.replace(/----/g,"####");
+    output = "```diff\n".concat(output).concat("```");
 
-    return  planOutput;
+    return  output;
 }
 
 function ghComment(tgOutput){
