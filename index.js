@@ -1,48 +1,34 @@
 const core      = require('@actions/core');
 const tgplan    = require('./utils/tgplan');
 const github    = require("@actions/github");
+const utils     = require('./utils/utils');
+
 
 try{
+    const context = github.context;
   
     if(core.getInput('comment') == 'true'){
-        comment();
+        switch (context.eventName) {
+            case "pull_request_review":
+                utils.ghComment("Deploying Terraform Code, wait for the results... 🚀\n\n ![](https://i.imgur.com/NAcXVep.gif)");
+                break;
+            case "pull_request":
+                utils.ghComment("Planing Terraform Code, wait for the results... 🚀\n\n ![](https://i.imgur.com/OhxcU6J.gif)");
+                break;
+        }
     }else{
-        const context = github.context;
 
         switch (context.eventName) {
             case "pull_request_review":
                 tgplan.runPlan();
-
                 break;
-            case "@Apply":
-                //Apply
+            case "pull_request":
+                tgplan.runPlan();
                 break;
         }
     }
-        
-    //tgplan.runPlan();
-    
+            
 } catch (error) {
     core.setFailed(error.message);
 }
 
-async function comment() {
-
-    const myToken = core.getInput('github_token');
-    const octokit = github.getOctokit(myToken)
-
-    const context = github.context;
-    if (context.payload.pull_request == null) {
-        core.setFailed('No pull request found.');
-        return;
-     }
-     
-    const pull_request_number = context.payload.pull_request.number;
-
-    const new_comment = await octokit.issues.createComment({
-        ...context.repo,
-        issue_number: pull_request_number,
-        body: "Deploying Terraform Code, wait for the results... 🚀\n\n ![](https://i.imgur.com/NAcXVep.gif)"
-    });
-
-}
