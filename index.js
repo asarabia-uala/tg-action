@@ -3,9 +3,9 @@ const command   = require('./utils/commands');
 const github    = require("@actions/github");
 const utils     = require('./utils/utils');
 
-
 try{
     const context = github.context;
+    console.log(context);
   
     if(core.getInput('comment') == 'true'){
         switch (context.eventName) {
