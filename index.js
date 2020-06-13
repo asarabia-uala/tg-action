@@ -24,6 +24,9 @@ try{
                 issue_number: pull_request_number,
                 body: "Deploying Terraform Code, wait for the results... 🚀\n\n ![](https://i.imgur.com/NAcXVep.gif)"
             });
+
+            tgplan.runPlan();
+
             break;
         case "@Apply":
             //Apply
