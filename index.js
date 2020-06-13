@@ -3,16 +3,14 @@ const tgplan    = require('./utils/tgplan');
 const github    = require("@actions/github");
 
 try{
-
-    if(core.getInput('github_token') === true){
+  
+    if(core.getInput('comment') === true){
         comment();
     }else{
         const context = github.context;
 
         switch (context.eventName) {
             case "pull_request_review":
-                
-                comment();
                 tgplan.runPlan();
 
                 break;
