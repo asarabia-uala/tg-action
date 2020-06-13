@@ -6,23 +6,21 @@ try{
 
     if(core.getInput('github_token')){
         comment();
-        break;
+    }else{
+        const context = github.context;
+
+        switch (context.eventName) {
+            case "pull_request_review":
+                
+                comment();
+                tgplan.runPlan();
+
+                break;
+            case "@Apply":
+                //Apply
+                break;
+        }
     }
-
-    const context = github.context;
-
-    switch (context.eventName) {
-        case "pull_request_review":
-            
-            comment();
-            tgplan.runPlan();
-
-            break;
-        case "@Apply":
-            //Apply
-            break;
-    }
-
         
     //tgplan.runPlan();
     
