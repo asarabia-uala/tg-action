@@ -4,7 +4,7 @@ const github    = require("@actions/github");
 
 try{
 
-    if(core.getInput('github_token')){
+    if(core.getInput('github_token') === true){
         comment();
     }else{
         const context = github.context;
