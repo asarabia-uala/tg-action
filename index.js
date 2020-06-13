@@ -10,10 +10,10 @@ try{
     if(core.getInput('comment') == 'true'){
         switch (context.eventName) {
             case "pull_request_review":
-                utils.ghComment("Deploying Terraform Code, wait for the results... 🚀\n\n ![](https://i.imgur.com/NAcXVep.gif)");
+                utils.ghComment("Deploying Terraform Code, wait for the results... :rocket: \n\n ![](https://i.imgur.com/NAcXVep.gif)");
                 break;
             case "pull_request":
-                utils.ghComment("Planing Terraform Code, wait for the results... 🚀\n\n ![](https://i.imgur.com/OhxcU6J.gif)");
+                utils.ghComment("[ Running Terragrunt Plan ... ] :mag_right: \n\n ![](https://i.imgur.com/OhxcU6J.gif)");
                 break;
         }
     }else{
