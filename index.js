@@ -16,10 +16,7 @@ try{
                 utils.ghComment("###  **[ Running Terragrunt Plan ... ]**  :mag_right: \n\n ![](https://i.imgur.com/OhxcU6J.gif)");
                 break;
         }
-
-        
     }else{
-
         switch (context.eventName) {
             case "pull_request_review":
                 command.runCmd("plan");

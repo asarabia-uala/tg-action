@@ -7,15 +7,15 @@ function runCmd(command){
 
     switch(command){
         case "plan":
-            let output = child_process.execSync("terragrunt plan-all --terragrunt-non-interactive --terragrunt-source-update --terragrunt-include-external-dependencies",{encoding: "utf8", cwd: dir });
+            let cmdout = child_process.execSync("terragrunt plan-all --terragrunt-non-interactive --terragrunt-source-update --terragrunt-include-external-dependencies",{encoding: "utf8", cwd: dir });
             break;
         case "apply":
-            let output = child_process.execSync("terragrunt apply-all --terragrunt-non-interactive --terragrunt-include-external-dependencies",{encoding: "utf8", cwd: dir });
-            break
+            let cmdout = child_process.execSync("terragrunt apply-all --terragrunt-non-interactive --terragrunt-include-external-dependencies",{encoding: "utf8", cwd: dir });
+            break;
     }
 
-    output = utils.formatPlan(output);
-    utils.ghComment(output);
+    cmdout = utils.formatPlan(cmdout);
+    utils.ghComment(cmdout);
 }
 
 module.exports = {
