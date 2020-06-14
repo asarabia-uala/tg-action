@@ -13,7 +13,7 @@ function printfiles(){
     }
 
     tree = octokit.git.getTree({
-        owner,
+        ...context.owner,
         ...context.repo,
         ...context.sha,
         recursive: "true"
