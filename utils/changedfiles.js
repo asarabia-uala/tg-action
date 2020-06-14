@@ -12,14 +12,14 @@ async function printfiles(){
         return;
     }
 
-    let files = await octokit.git.getTree({
-        ...context.owner,
-        ...context.repo,
-        ...context.sha,
-        recursive: 1
-     });
+    // let files = await octokit.git.getTree({
+    //     ...context.owner,
+    //     ...context.repo,
+    //     ...context.sha,
+    //     recursive: 1
+    //  });
     
-    console.log(files);
+    // console.log(files);
 
 }
 
