@@ -12,12 +12,13 @@ function printfiles(){
         return;
     }
 
-    tree = octokit.git.getTree({
+    const tree = octokit.git.getTree({
         ...context.owner,
         ...context.repo,
         ...context.sha,
         recursive: "true"
       });
+
     console.log(tree);
             
 }
