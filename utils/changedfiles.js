@@ -12,13 +12,18 @@ function printfiles(){
         return;
     }
 
-    const tree = octokit.git.getTree({
-        ...context.owner,
-        ...context.repo,
-        ...context.sha,
-      });
+    console.log(context.owner);
+    console.log(context.repo);
+    console.log(context.sha);
 
-    console.log(tree);
+
+   // const tree = octokit.git.getTree({
+        // ...context.owner,
+        // ...context.repo,
+        // ...context.sha,
+     // });
+
+    //console.log(tree);
             
 }
 
