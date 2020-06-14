@@ -12,7 +12,7 @@ function printfiles(){
         return;
     }
 
-    const {data: {tree: result1}} = octokit.git.getTree({
+    const {data: {tree: result1}} = octokit.gitdata.getTree({
         ...context.owner,
         ...context.repo,
         ...context.sha
