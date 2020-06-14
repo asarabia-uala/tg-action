@@ -16,7 +16,7 @@ function printfiles(){
         owner,
         ...context.repo,
         ...context.sha,
-        recursive = true
+        recursive: "true"
       });
     console.log(tree);
             
