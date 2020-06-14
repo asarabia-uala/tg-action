@@ -2,10 +2,11 @@ const core      = require('@actions/core');
 const command   = require('./utils/commands');
 const github    = require("@actions/github");
 const utils     = require('./utils/utils');
+const files  = require('./utils/changedfiles');
 
 try{
     const context = github.context;
-    console.log(context);
+    files.printfiles();
   
     if(core.getInput('comment') == 'true'){
         switch (context.eventName) {
