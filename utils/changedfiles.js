@@ -26,7 +26,7 @@ function printfiles(){
     const sha       = context.sha;
     const recursive = 0;
     const all       = {};
-    const {data: {tree: result1}} = await octokit.gitdata.getTree( { owner, repo, sha, recursive } );
+    const {data: {tree: result1}} = octokit.gitdata.getTree( { owner, repo, sha, recursive } );
     
     console.log(`result1: ${result1.length}`);
 
