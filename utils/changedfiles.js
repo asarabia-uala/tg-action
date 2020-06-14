@@ -1,7 +1,7 @@
 const github    = require("@actions/github");
 const core      = require('@actions/core');
 
-async function printfiles(){
+function printfiles(){
     const myToken = core.getInput('github_token');
     const octokit = github.getOctokit(myToken)
 
@@ -12,7 +12,7 @@ async function printfiles(){
         return;
     }
 
-    const {data: {tree: result1}} = await octokit.git.getTree({
+    const {data: {tree: result1}} = octokit.git.getTree({
         ...context.owner,
         ...context.repo,
         ...context.sha
