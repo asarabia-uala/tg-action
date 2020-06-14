@@ -12,21 +12,18 @@ function printfiles(){
         return;
     }
 
-   // const tree = octokit.git.getTree({
-        // ...context.owner,
-        // ...context.repo,
-        // ...context.sha,
-     // });
-
-    //console.log(tree);
             
-
-    const owner     = context.owner;
-    const repo      = context.repo;
-    const sha       = context.sha;
-    const recursive = 0;
     const all       = {};
-    const {data: {tree: result1}} = octokit.gitdata.getTree( { owner, repo, sha, recursive } );
+
+    const {data: {tree: result1}} = octokit.git.getTree({
+        ...context.owner,
+        ...context.repo,
+        ...context.sha,
+        recursive: 1
+     });
+
+
+   // const {data: {tree: result1}} = octokit.gitdata.getTree( { owner, repo, sha, recursive } );
     
     console.log(`result1: ${result1.length}`);
 
