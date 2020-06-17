@@ -6,7 +6,7 @@ const files  = require('./utils/changedfiles');
 
 try{
     const context = github.context;
-    files.printfiles();
+    //files.printfiles();
   
     if(core.getInput('comment') == 'true'){
         switch (context.eventName) {
