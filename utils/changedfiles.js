@@ -152,28 +152,37 @@ function toJSON(value, pretty=true) {
 		: JSON.stringify(value);
 }
 
+function splitPath(path) {
+    var result = path.replace(/\\/g, "/").match(/(.*\/)?(\..*?|.*?)(\.[^.]*?)?(#.*$|\?.*$|$)/);
+    return result[1];
+}
+
 
 debug('context', context);
 debug('args', args);
 
 function changedFiles(){
 
-getCommits().then(commits => {
-	// Exclude merge commits
-	commits = commits.filter(c => ! c.parents || 1 === c.parents.length);
+    getCommits().then(commits => {
+        // Exclude merge commits
+        commits = commits.filter(c => ! c.parents || 1 === c.parents.length);
 
-	if ('push' === context.eventName) {
-		commits = commits.filter(c => c.distinct);
-	}
+        if ('push' === context.eventName) {
+            commits = commits.filter(c => c.distinct);
+        }
 
-	debug('All Commits', commits);
+        debug('All Commits', commits);
 
-	Promise.all(commits.map(fetchCommitData))
-		.then(data => Promise.all(data.map(processCommitData)))
-		.then(outputResults)
-		.then(() => process.exitCode = 0)
-		.catch(err => core.error(err) && (process.exitCode = 1));
-});
+        Promise.all(commits.map(fetchCommitData))
+            .then(data => Promise.all(data.map(processCommitData)))
+            .then(outputResults)
+            .then(() => process.exitCode = 0)
+            .catch(err => core.error(err) && (process.exitCode = 1));
+    });
+
+    files = Array.from(FILES.values())
+    files.forEach(element => console.log(element));
+
 }
 
 module.exports = {
