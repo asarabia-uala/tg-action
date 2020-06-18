@@ -2,12 +2,15 @@ const core      = require('@actions/core');
 const command   = require('./utils/commands');
 const github    = require("@actions/github");
 const utils     = require('./utils/utils');
-const files  = require('./utils/changedfiles');
+const files     = require('./utils/changedfiles');
+const child_process = require('child_process');
 
 try{
     const context = github.context;
-    //files.printfiles();
-  
+    files.changedFiles();
+    
+    child_process.execSync("cat ${HOME}/files.json",{encoding: "utf8"});
+
     if(core.getInput('comment') == 'true'){
         switch (context.eventName) {
             case "pull_request_review":
