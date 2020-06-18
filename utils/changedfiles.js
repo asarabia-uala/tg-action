@@ -36,8 +36,6 @@ const args = { owner: owner.name || owner.login, repo: repo.name };
 async function getCommits() {
 	let commits;
 
-	debug('Getting commits...');
-
 	switch(context.eventName) {
 		case 'push':
 			commits = context.payload.commits;
@@ -50,7 +48,7 @@ async function getCommits() {
 		break;
 
 		default:
-			info('You are using this action on an event for which it has not been tested. Only the "push" and "pull_request" events are officially supported.');
+			console.log('You are using this action on an event for which it has not been tested. Only the "push" and "pull_request" events are officially supported.');
 
 			commits = [];
 		break;
