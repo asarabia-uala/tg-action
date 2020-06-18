@@ -180,8 +180,7 @@ function changedFiles(){
             .catch(err => core.error(err) && (process.exitCode = 1));
     });
 
-    files = Array.from(FILES.values())
-    files.forEach(element => console.log(element));
+    return files = Array.from(FILES.values())
 
 }
 
