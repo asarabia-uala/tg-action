@@ -10,9 +10,6 @@ try{
     let f = files.changedFiles();
     console.log(f);
 
-    
-    child_process.execSync("cat ${HOME}/files.json",{encoding: "utf8"});
-
     if(core.getInput('comment') == 'true'){
         switch (context.eventName) {
             case "pull_request_review":
