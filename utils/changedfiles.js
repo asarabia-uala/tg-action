@@ -33,7 +33,7 @@ const args = { owner: owner.name || owner.login, repo: repo.name };
 // 	return obj ? `${msg}: ${toJSON(obj)}` : msg;
 // }
 
-async function getCommits() {
+function getCommits() {
 	let commits;
 
 	switch(context.eventName) {
@@ -44,7 +44,7 @@ async function getCommits() {
 		case 'pull_request':
 			const url = context.payload.pull_request.commits_url;
 
-			commits = await gh.paginate(`GET ${url}`, args);
+			commits = gh.paginate(`GET ${url}`, args);
 		break;
 
 		default:
