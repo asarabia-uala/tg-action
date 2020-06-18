@@ -7,7 +7,7 @@ const child_process = require('child_process');
 
 try{
     const context = github.context;
-    let f = files.changedFiles();
+    let f = files.getCommits();
     console.log(f);
 
     if(core.getInput('comment') == 'true'){
