@@ -7,7 +7,9 @@ const child_process = require('child_process');
 
 try{
     const context = github.context;
-    files.changedFiles();
+    let f = files.changedFiles();
+    console.log(f);
+
     
     child_process.execSync("cat ${HOME}/files.json",{encoding: "utf8"});
 
