@@ -13,7 +13,7 @@ const FILES_MODIFIED = new Set();
 const FILES_REMOVED  = new Set();
 const FILES_RENAMED  = new Set();
 
-const gh   = github.getOctokit(core.getInput('token'));
+const gh   = github.getOctokit(core.getInput('github_token'));
 const args = { owner: owner.name || owner.login, repo: repo.name };
 
 
