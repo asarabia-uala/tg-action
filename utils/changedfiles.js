@@ -78,6 +78,14 @@ function isRenamed(file) {
 	return 'renamed' === file.status;
 }
 
+async function outputResults() {
+
+    const result  = new Set();
+    let Files = Array.from(FILES.values());
+    Files.forEach(element => result.add(splitPath(element)));
+
+    return result;
+}
 
 async function processCommitData(result) {
 	debug('Processing API Response', result);
@@ -153,15 +161,14 @@ function changedFiles(){
 
         debug('All Commits', commits);
 
-        Promise.all(commits.map(fetchCommitData))
+        let promise = Promise.all(commits.map(fetchCommitData))
             .then(data => Promise.all(data.map(processCommitData)))
+            .then(outputResults)
             .then(() => process.exitCode = 0)
             .catch(err => core.error(err) && (process.exitCode = 1));
     });
-    
-    let Files = Array.from(FILES.values());
-    Files.forEach(element => console.log(splitPath(element)));
 
+    files = await promise;
 }
 
   
