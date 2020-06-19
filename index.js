@@ -7,8 +7,9 @@ const child_process = require('child_process');
 
 try{
     const context = github.context;
-    let f = files.getCommits();
-    console.log(f);
+
+
+    files.getCommits().then(val => console.log(val));
 
     if(core.getInput('comment') == 'true'){
         switch (context.eventName) {
