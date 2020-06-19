@@ -9,7 +9,8 @@ try{
     const context = github.context;
 
 
-    files.getCommits().then(val => console.log(val));
+    data = files.changedFiles();
+    console.log(data);
 
     if(core.getInput('comment') == 'true'){
         switch (context.eventName) {

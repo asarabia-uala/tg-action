@@ -179,7 +179,7 @@ function changedFiles(){
             .catch(err => core.error(err) && (process.exitCode = 1));
     });
 
-    return files = Array.from(FILES.values());
+    return data;
 
 }
 
