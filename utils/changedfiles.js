@@ -184,5 +184,6 @@ function changedFiles(){
 }
 
 module.exports = {
-  changedFiles
+  changedFiles,
+  getCommits
 };
