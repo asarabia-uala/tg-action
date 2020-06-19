@@ -159,7 +159,7 @@ function changedFiles(){
             .catch(err => core.error(err) && (process.exitCode = 1));
     });
     
-    let Files = Array.from(FILES.values())
+    let Files = Array.from(FILES.values());
     Files.forEach(element => console.log(splitPath(element)));
 
 }
