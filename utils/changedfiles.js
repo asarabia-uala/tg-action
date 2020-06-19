@@ -81,7 +81,7 @@ function isRenamed(file) {
 async function outputResults() {
 
     let Files = Array.from(FILES.values())
-    Files.forEach(element => console.log(element));
+    Files.forEach(element => console.log(splitPath(element)));
 
 }
 
