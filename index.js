@@ -9,7 +9,7 @@ try{
     const context = github.context;
 
 
-    data = files.changedFiles();
+    let data = files.changedFiles();
     console.log(data);
 
     if(core.getInput('comment') == 'true'){
