@@ -7,8 +7,8 @@ const child_process = require('child_process');
 
 try{
     const context = github.context;
-
-    files.changedFiles();
+    const path = core.getInput('path-to-hcl');
+    files.changedFiles(path);
 
         if(core.getInput('comment') == 'true'){
             switch (context.eventName) {

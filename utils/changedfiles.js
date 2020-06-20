@@ -1,12 +1,9 @@
-// External Dependencies
-const fs     = require('fs');
 const github = require('@actions/github');
 const core   = require('@actions/core');
 
 const context = github.context;
 const repo    = context.payload.repository;
 const owner   = repo.owner;
-
 const FILES          = new Set();
 
 const gh   = github.getOctokit(core.getInput('github_token'));
@@ -39,7 +36,6 @@ async function getCommits() {
 	return commits;
 }
 
-
 async function outputResults() {
     return Array.from(FILES.values());
 }
@@ -55,19 +51,12 @@ function processCommitData(result) {
 	});
 }
 
-function toJSON(value, pretty=true) {
-	return pretty
-		? JSON.stringify(value, null, 4)
-		: JSON.stringify(value);
-}
-
 function splitPath(path) {
     var result = path.replace(/\\/g, "/").match(/(.*\/)?(\..*?|.*?)(\.[^.]*?)?(#.*$|\?.*$|$)/);
     return result[1];
 }
 
-
-async function changedFiles(){
+async function changedFiles(path){
 
     let commits = await getCommits();
     // Exclude merge commits
@@ -77,13 +66,13 @@ async function changedFiles(){
         commits = commits.filter(c => c.distinct);
     }
 
-    const asyncRes = await Promise.all(commits.map(fetchCommitData))
+    const chDirs = await Promise.all(commits.map(fetchCommitData))
         .then(data => Promise.all(data.map(processCommitData)))
         .then(outputResults)
 		.catch(err => core.error(err) && (process.exitCode = 1));
 
-    console.log(asyncRes);
-    
+    flag = chDirs.find(path);
+    console.log(flag);
 }
   
 module.exports = {
