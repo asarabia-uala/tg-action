@@ -121,6 +121,7 @@ function splitPath(path) {
 async function changedFiles(){
 
     let commits = await getCommits();
+    console.log(commits);
     // Exclude merge commits
     // commits = commits.filter(c => ! c.parents || 1 === c.parents.length);
 
