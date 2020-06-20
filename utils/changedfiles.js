@@ -136,7 +136,7 @@ async function changedFiles(){
     // let Files = Array.from(FILES.values());
     // Files.forEach(element => result.add(splitPath(element)));
     
-    return commits;
+    console.log(commits);
 }
 
   

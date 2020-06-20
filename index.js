@@ -8,8 +8,7 @@ const child_process = require('child_process');
 try{
     const context = github.context;
 
-    let resutl = files.changedFiles();
-    console.log(resutl);
+    files.changedFiles();
 
         if(core.getInput('comment') == 'true'){
             switch (context.eventName) {
