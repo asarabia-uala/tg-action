@@ -71,7 +71,7 @@ async function changedFiles(path){
         .then(outputResults)
 		.catch(err => core.error(err) && (process.exitCode = 1));
 
-    flag = chDirs.find( dir => dir == path );
+    let flag = chDirs.find( dir => dir == path );
     console.log(flag);
 }
   
