@@ -71,8 +71,7 @@ async function changedFiles(path){
         .then(outputResults)
 		.catch(err => core.error(err) && (process.exitCode = 1));
 
-    let flag = chDirs.includes(path);
-    console.log(flag);
+    console.log(chDirs.includes(path));
 }
   
 module.exports = {
