@@ -122,16 +122,16 @@ async function changedFiles(){
 
     let commits = await getCommits();
     // Exclude merge commits
-    // commits = commits.filter(c => ! c.parents || 1 === c.parents.length);
+    commits = commits.filter(c => ! c.parents || 1 === c.parents.length);
 
-    // if ('push' === context.eventName) {
-    //     commits = commits.filter(c => c.distinct);
-    // }
+    if ('push' === context.eventName) {
+        commits = commits.filter(c => c.distinct);
+    }
 
     // for(const commit in commits){ 
     //     console.log(commit);
     // }
-    console.log(commits);
+    console.log(commits[0]);
 
     // commits.forEach(element => result.add(processCommitData(element)));
 
