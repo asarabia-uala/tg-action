@@ -129,12 +129,21 @@ async function changedFiles(){
         commits = commits.filter(c => c.distinct);
     }
 
-    var roots = commits.map(async function(commit) {
-            let test = await fetchCommitData(commit);
-            return test;
-    });
+    const asyncRes = Promise.all(commits.map(fetchCommitData))
+		.then(data => Promise.all(data.map(processCommitData)))
+		.then(outputResults)
+		.then(() => process.exitCode = 0)
+		.catch(err => core.error(err) && (process.exitCode = 1));
 
-    console.log(roots);
+    console.log(asyncRes);
+
+
+    // var roots = commits.map(async function(commit) {
+    //         let test = await fetchCommitData(commit);
+    //         return test;
+    // });
+
+    // console.log(roots);
     // commits.forEach(async commit =>{ 
 
 
