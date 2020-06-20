@@ -132,7 +132,7 @@ async function changedFiles(){
     //     console.log(commit);
     // }
     console.log(commits[0].sha);
-    console.log(commits[0].id);
+    //console.log(commits[0].id);
 
 
     // commits.forEach(element => result.add(processCommitData(element)));
