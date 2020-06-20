@@ -123,11 +123,11 @@ function changedFiles(){
     let commits = getCommits();
     let result = new Set();
     // Exclude merge commits
-    commits = commits.filter(c => ! c.parents || 1 === c.parents.length);
+    //commits = commits.filter(c => ! c.parents || 1 === c.parents.length);
 
-    if ('push' === context.eventName) {
-        commits = commits.filter(c => c.distinct);
-    }
+    // if ('push' === context.eventName) {
+    //     commits = commits.filter(c => c.distinct);
+    // }
 
     commits = commits.map(fetchCommitData());
     // commits.forEach(element => result.add(processCommitData(element)));
