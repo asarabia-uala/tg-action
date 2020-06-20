@@ -8,10 +8,6 @@ const repo    = context.payload.repository;
 const owner   = repo.owner;
 
 const FILES          = new Set();
-const FILES_ADDED    = new Set();
-const FILES_MODIFIED = new Set();
-const FILES_REMOVED  = new Set();
-const FILES_RENAMED  = new Set();
 
 const gh   = github.getOctokit(core.getInput('github_token'));
 const args = { owner: owner.name || owner.login, repo: repo.name };
@@ -43,24 +39,9 @@ async function getCommits() {
 	return commits;
 }
 
-function isAdded(file) {
-	return 'added' === file.status;
-}
-
-function isModified(file) {
-	return 'modified' === file.status;
-}
-
-function isRemoved(file) {
-	return 'removed' === file.status;
-}
-
-function isRenamed(file) {
-	return 'renamed' === file.status;
-}
 
 async function outputResults() {
-    return Array.from(FILES.values())
+    return Array.from(FILES.values());
 }
 
 function processCommitData(result) {
@@ -70,43 +51,12 @@ function processCommitData(result) {
 	}
 
 	result.data.files.forEach(file => {
-		(isAdded(file) || isModified(file) || isRenamed(file)) && FILES.add(file.filename);
-
-		if (isAdded(file)) {
-			FILES_ADDED.add(file.filename);
-			FILES_REMOVED.delete(file.filename);
-
-			return; // continue
-		}
-
-		if (isRemoved(file)) {
-			if (! FILES_ADDED.has(file.filename)) {
-				FILES_REMOVED.add(file.filename);
-			}
-
-			FILES_ADDED.delete(file.filename);
-			FILES_MODIFIED.delete(file.filename);
-
-			return; // continue;
-		}
-
-		if (isModified(file)) {
-			FILES_MODIFIED.add(file.filename);
-
-			return; // continue;
-		}
-
-		if (isRenamed(file)) {
-			processRenamedFile(file.previous_filename, file.filename);
-		}
+		FILES.add(file.filename);
 	});
 }
 
 function processRenamedFile(prev_file, new_file) {
 	FILES.delete(prev_file) && FILES.add(new_file);
-	FILES_ADDED.delete(prev_file) && FILES_ADDED.add(new_file);
-	FILES_MODIFIED.delete(prev_file) && FILES_MODIFIED.add(new_file);
-	FILES_RENAMED.add(new_file);
 }
 
 function toJSON(value, pretty=true) {
