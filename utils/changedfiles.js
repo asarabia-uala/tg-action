@@ -21,7 +21,7 @@ function fetchCommitData(commit) {
 	return gh.repos.getCommit(args);
 }
 
-function getCommits() {
+async function getCommits() {
 	let commits;
 
 	switch(context.eventName) {
@@ -32,7 +32,7 @@ function getCommits() {
 		case 'pull_request':
 			const url = context.payload.pull_request.commits_url;
 
-            commits = gh.paginate(`GET ${url}`, args);
+            commits = await gh.paginate(`GET ${url}`, args);
 		break;
 
 		default:
