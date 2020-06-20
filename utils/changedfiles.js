@@ -129,8 +129,7 @@ async function changedFiles(){
     // }
 
     for(const commit in commits.values()){ 
-        data.map(await fetchCommitData(commit));
-        console.log(data);
+        console.log(commit);
     }
 
     // commits.forEach(element => result.add(processCommitData(element)));
