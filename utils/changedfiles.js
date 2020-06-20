@@ -130,7 +130,7 @@ async function changedFiles(){
     // }
 
     for(const commit in commits.values()){ 
-        data = await fetchCommitData(commit);
+        data.map(await fetchCommitData(commit));
         console.log(data);
     }
 
