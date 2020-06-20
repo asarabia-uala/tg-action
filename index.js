@@ -9,6 +9,7 @@ try{
     const context = github.context;
 
     let resutl = files.changedFiles();
+    console.log(resutl);
 
         if(core.getInput('comment') == 'true'){
             switch (context.eventName) {
