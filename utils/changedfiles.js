@@ -129,7 +129,8 @@ async function changedFiles(){
     }
 
     var roots = commits.map(async function(commit) {
-        return await fetchCommitData(commit);
+            let test = await fetchCommitData(commit);
+            return test;
     });
 
     console.log(roots);
