@@ -120,7 +120,7 @@ function splitPath(path) {
 
 function changedFiles(){
 
-    let commits = getCommits();
+    let commits = await getCommits();
     let result = new Set();
     // Exclude merge commits
     //commits = commits.filter(c => ! c.parents || 1 === c.parents.length);
