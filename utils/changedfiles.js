@@ -61,7 +61,6 @@ function isRenamed(file) {
 }
 
 function processCommitData(result) {
-	debug('Processing API Response', result);
 
 	if (! result || ! result.data) {
 		return;
