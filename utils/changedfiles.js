@@ -121,14 +121,14 @@ function splitPath(path) {
 async function changedFiles(){
 
     let commits = await getCommits();
-
-    //let result = new Set();
     // Exclude merge commits
     commits = commits.filter(c => ! c.parents || 1 === c.parents.length);
 
-    // if ('push' === context.eventName) {
-    //     commits = commits.filter(c => c.distinct);
-    // }
+    if ('push' === context.eventName) {
+        commits = commits.filter(c => c.distinct);
+    }
+
+    let data = commits.forEach(commit => fetchCommitData(commit));
 
     //commits = commits.map(fetchCommitData());
     // commits.forEach(element => result.add(processCommitData(element)));
