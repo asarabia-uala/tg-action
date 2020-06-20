@@ -118,7 +118,7 @@ function splitPath(path) {
 }
 
 
-function changedFiles(){
+async function changedFiles(){
 
     let commits = await getCommits();
     let result = new Set();
