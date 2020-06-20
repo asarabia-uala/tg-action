@@ -128,10 +128,21 @@ async function changedFiles(){
         commits = commits.filter(c => c.distinct);
     }
 
-    commits.forEach(async commit =>{ 
-        const test = await fetchCommitData(commit);
-        console.log(test);
+    var roots = commits.map(async function(commit) {
+        return await fetchCommitData(commit);
     });
+
+    console.log(roots);
+    // commits.forEach(async commit =>{ 
+
+
+
+
+    //     let commits.map(
+            
+    //         await fetchCommitData(commit));
+    // });
+
     // for(const commit in commits.values()){ 
     //     console.log(commit.sha);
     // }
