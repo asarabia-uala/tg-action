@@ -51,12 +51,8 @@ function processCommitData(result) {
 	}
 
 	result.data.files.forEach(file => {
-		FILES.add(file.filename);
+		FILES.add(splitPath(file.filename));
 	});
-}
-
-function processRenamedFile(prev_file, new_file) {
-	FILES.delete(prev_file) && FILES.add(new_file);
 }
 
 function toJSON(value, pretty=true) {
@@ -87,39 +83,8 @@ async function changedFiles(){
 		.catch(err => core.error(err) && (process.exitCode = 1));
 
     console.log(asyncRes);
-
-
-    // var roots = commits.map(async function(commit) {
-    //         let test = await fetchCommitData(commit);
-    //         return test;
-    // });
-
-    // console.log(roots);
-    // commits.forEach(async commit =>{ 
-
-
-
-
-    //     let commits.map(
-            
-    //         await fetchCommitData(commit));
-    // });
-
-    // for(const commit in commits.values()){ 
-    //     console.log(commit.sha);
-    // }
-    //console.log(commits[0].sha);
-    //console.log(commits[0].id);
-
-
-    // commits.forEach(element => result.add(processCommitData(element)));
-
-    // const result  = new Set();
-    // let Files = Array.from(FILES.values());
-    // Files.forEach(element => result.add(splitPath(element)));
     
 }
-
   
 module.exports = {
   changedFiles
