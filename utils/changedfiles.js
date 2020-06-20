@@ -16,27 +16,13 @@ const FILES_RENAMED  = new Set();
 const gh   = github.getOctokit(core.getInput('github_token'));
 const args = { owner: owner.name || owner.login, repo: repo.name };
 
-
-function debug(msg, obj = null) {
-	core.debug(formatLogMessage(msg, obj));
-}
-
 function fetchCommitData(commit) {
 	args.ref = commit.id || commit.sha;
-
-	debug('Calling gh.repos.getCommit() with args', args)
-
 	return gh.repos.getCommit(args);
 }
 
-function formatLogMessage(msg, obj = null) {
-	return obj ? `${msg}: ${toJSON(obj)}` : msg;
-}
-
-async function getCommits() {
+function getCommits() {
 	let commits;
-
-	debug('Getting commits...');
 
 	switch(context.eventName) {
 		case 'push':
@@ -46,20 +32,15 @@ async function getCommits() {
 		case 'pull_request':
 			const url = context.payload.pull_request.commits_url;
 
-            commits = await gh.paginate(`GET ${url}`, args);
+            commits = gh.paginate(`GET ${url}`, args);
 		break;
 
 		default:
-			info('You are using this action on an event for which it has not been tested. Only the "push" and "pull_request" events are officially supported.');
 			commits = [];
 		break;
 	}
 
 	return commits;
-}
-
-function info(msg, obj = null) {
-	core.info(formatLogMessage(msg, obj));
 }
 
 function isAdded(file) {
@@ -78,16 +59,7 @@ function isRenamed(file) {
 	return 'renamed' === file.status;
 }
 
-async function outputResults() {
-
-    const result  = new Set();
-    let Files = Array.from(FILES.values());
-    Files.forEach(element => result.add(splitPath(element)));
-
-    return result;
-}
-
-async function processCommitData(result) {
+function processCommitData(result) {
 	debug('Processing API Response', result);
 
 	if (! result || ! result.data) {
@@ -146,29 +118,25 @@ function splitPath(path) {
 }
 
 
-debug('context', context);
-debug('args', args);
-
-
 function changedFiles(){
-    getCommits().then(commits => {
-        // Exclude merge commits
-        commits = commits.filter(c => ! c.parents || 1 === c.parents.length);
 
-        if ('push' === context.eventName) {
-            commits = commits.filter(c => c.distinct);
-        }
+    let commits = getCommits();
+    let result = new Set();
+    // Exclude merge commits
+    commits = commits.filter(c => ! c.parents || 1 === c.parents.length);
 
-        debug('All Commits', commits);
+    if ('push' === context.eventName) {
+        commits = commits.filter(c => c.distinct);
+    }
 
-        let promise = Promise.all(commits.map(fetchCommitData))
-            .then(data => Promise.all(data.map(processCommitData)))
-            .then(outputResults)
-            .then(() => process.exitCode = 0)
-            .catch(err => core.error(err) && (process.exitCode = 1));
-    });
+    commits = commits.map(fetchCommitData());
+    // commits.forEach(element => result.add(processCommitData(element)));
 
-    files = await promise;
+    // const result  = new Set();
+    // let Files = Array.from(FILES.values());
+    // Files.forEach(element => result.add(splitPath(element)));
+    
+    return commits;
 }
 
   

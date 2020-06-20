@@ -8,7 +8,7 @@ const child_process = require('child_process');
 try{
     const context = github.context;
 
-    if(files.changedFiles()){
+    let resutl = files.changedFiles();
 
         if(core.getInput('comment') == 'true'){
             switch (context.eventName) {
@@ -29,7 +29,7 @@ try{
                     break;
             }
         }
-    }
+    
             
 } catch (error) {
     core.setFailed(error.message);
