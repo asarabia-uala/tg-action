@@ -128,7 +128,7 @@ async function changedFiles(){
         commits = commits.filter(c => c.distinct);
     }
 
-    const asyncRes = Promise.all(commits.map(fetchCommitData))
+    const asyncRes = await Promise.all(commits.map(fetchCommitData))
 		.then(data => Promise.all(data.map(processCommitData)))
 		.then(() => process.exitCode = 0)
 		.catch(err => core.error(err) && (process.exitCode = 1));
