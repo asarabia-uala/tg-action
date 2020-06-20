@@ -59,6 +59,10 @@ function isRenamed(file) {
 	return 'renamed' === file.status;
 }
 
+async function outputResults() {
+    return Array.from(FILES.values())
+}
+
 function processCommitData(result) {
 
 	if (! result || ! result.data) {
@@ -128,7 +132,8 @@ async function changedFiles(){
     }
 
     const asyncRes = await Promise.all(commits.map(fetchCommitData))
-		// .then(data => await Promise.all(data.map(processCommitData)))
+        .then(data => await Promise.all(data.map(processCommitData)))
+        .then(outputResults)
 		.catch(err => core.error(err) && (process.exitCode = 1));
 
     console.log(asyncRes);
