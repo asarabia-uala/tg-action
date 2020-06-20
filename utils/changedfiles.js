@@ -130,7 +130,6 @@ async function changedFiles(){
 
     const asyncRes = await Promise.all(commits.map(fetchCommitData))
 		.then(data => Promise.all(data.map(processCommitData)))
-		.then(() => process.exitCode = 0)
 		.catch(err => core.error(err) && (process.exitCode = 1));
 
     console.log(asyncRes);
