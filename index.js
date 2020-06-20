@@ -3,7 +3,6 @@ const command   = require('./utils/commands');
 const github    = require("@actions/github");
 const utils     = require('./utils/utils');
 const files     = require('./utils/changedfiles');
-const child_process = require('child_process');
 
 try{
     const context = github.context;
@@ -19,19 +18,21 @@ try{
                     break;
             }
         }else{
-            files.changedFiles(path);
 
-            // switch (context.eventName) {
-            //     case "pull_request_review":
-            //         command.runCmd("plan");
-            //         break;
-            //     case "pull_request":
-            //         command.runCmd("plan");
-            //         break;
-            // }
+            if(!files.changedFiles(path)){
+                return;
+            }
+
+            switch (context.eventName) {
+                case "pull_request_review":
+                    command.runCmd("plan");
+                    break;
+                case "pull_request":
+                    command.runCmd("plan");
+                    break;
+            }
         }
     
-            
 } catch (error) {
     core.setFailed(error.message);
 }
