@@ -8,7 +8,6 @@ const child_process = require('child_process');
 try{
     const context = github.context;
     const path = core.getInput('path-to-hcl');
-    files.changedFiles(path);
 
         if(core.getInput('comment') == 'true'){
             switch (context.eventName) {
@@ -20,14 +19,16 @@ try{
                     break;
             }
         }else{
-            switch (context.eventName) {
-                case "pull_request_review":
-                    command.runCmd("plan");
-                    break;
-                case "pull_request":
-                    command.runCmd("plan");
-                    break;
-            }
+            files.changedFiles(path);
+
+            // switch (context.eventName) {
+            //     case "pull_request_review":
+            //         command.runCmd("plan");
+            //         break;
+            //     case "pull_request":
+            //         command.runCmd("plan");
+            //         break;
+            // }
         }
     
             
