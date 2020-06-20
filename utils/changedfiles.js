@@ -131,7 +131,9 @@ async function changedFiles(){
     // for(const commit in commits){ 
     //     console.log(commit);
     // }
-    console.log(commits[0]);
+    console.log(commits[0].sha);
+    console.log(commits[0].id);
+
 
     // commits.forEach(element => result.add(processCommitData(element)));
 
