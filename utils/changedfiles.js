@@ -129,7 +129,7 @@ function changedFiles(){
     //     commits = commits.filter(c => c.distinct);
     // }
 
-    commits = commits.map(fetchCommitData());
+    //commits = commits.map(fetchCommitData());
     // commits.forEach(element => result.add(processCommitData(element)));
 
     // const result  = new Set();
