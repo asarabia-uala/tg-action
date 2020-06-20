@@ -128,7 +128,7 @@ async function changedFiles(){
         commits = commits.filter(c => c.distinct);
     }
 
-    commits.forEach(commit => console.log(fetchCommitData(commit)));
+    commits.forEach(commit => console.log(await fetchCommitData(commit)));
     // for(const commit in commits.values()){ 
     //     console.log(commit.sha);
     // }
