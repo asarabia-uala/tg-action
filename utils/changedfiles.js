@@ -128,16 +128,15 @@ async function changedFiles(){
         commits = commits.filter(c => c.distinct);
     }
 
-    let data = commits.forEach(commit => fetchCommitData(commit));
+    commits.forEach(commit => console.log(fetchCommitData(commit)));
 
-    //commits = commits.map(fetchCommitData());
     // commits.forEach(element => result.add(processCommitData(element)));
 
     // const result  = new Set();
     // let Files = Array.from(FILES.values());
     // Files.forEach(element => result.add(splitPath(element)));
     
-    console.log(commits);
+    console.log(data);
 }
 
   
