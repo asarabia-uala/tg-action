@@ -129,9 +129,8 @@ async function changedFiles(){
     //     commits = commits.filter(c => c.distinct);
     // }
 
-    for(const commit in commits.values()){
-        console.log(commit);
-       // console.log(await fetchCommitData(commit));
+    for(const commit in commits.values()){ 
+       console.log(await fetchCommitData(commit));
     }
 
     // commits.forEach(element => result.add(processCommitData(element)));
