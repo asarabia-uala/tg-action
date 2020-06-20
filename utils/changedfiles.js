@@ -16,10 +16,9 @@ const FILES_RENAMED  = new Set();
 const gh   = github.getOctokit(core.getInput('github_token'));
 const args = { owner: owner.name || owner.login, repo: repo.name };
 
-async function fetchCommitData(commit) {
+function fetchCommitData(commit) {
 	args.ref = commit.id || commit.sha;
-    let data = await gh.repos.getCommit(args);
-    return data;
+    return gh.repos.getCommit(args);
 }
 
 async function getCommits() {
