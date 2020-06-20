@@ -1,10 +1,10 @@
-const github = require('@actions/github');
-const core   = require('@actions/core');
+const github  = require('@actions/github');
+const core    = require('@actions/core');
 
 const context = github.context;
 const repo    = context.payload.repository;
 const owner   = repo.owner;
-const FILES          = new Set();
+const FILES   = new Set();
 
 const gh   = github.getOctokit(core.getInput('github_token'));
 const args = { owner: owner.name || owner.login, repo: repo.name };
@@ -70,8 +70,8 @@ async function changedFiles(path){
         .then(data => Promise.all(data.map(processCommitData)))
         .then(outputResults)
 		.catch(err => core.error(err) && (process.exitCode = 1));
-    console.log(chDirs);
-    console.log(chDirs.includes(String(path)));
+   
+        return chDirs.includes(String(path));
 }
   
 module.exports = {
