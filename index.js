@@ -3,6 +3,7 @@ const command   = require('./utils/commands');
 const github    = require("@actions/github");
 const utils     = require('./utils/utils');
 const files     = require('./utils/changedfiles');
+const child_process = require('child_process');
 
 try{
     const context = github.context;
@@ -18,7 +19,6 @@ try{
                     break;
             }
         }else{
-
             if(!files.changedFiles(path)){
                 return;
             }
@@ -32,9 +32,10 @@ try{
                     break;
             }
         }
-    
+            
 } catch (error) {
     core.setFailed(error.message);
-    
+    cmdout = utils.formatOutput(error.message);
+    utils.ghComment(cmdout);
 }
 
