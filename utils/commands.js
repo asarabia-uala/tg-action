@@ -16,10 +16,10 @@ function runCmd(command){
                 break;
         }
 
-        cmdout = utils.formatOutput(cmdout);
         utils.ghComment(cmdout);
+        
     }catch (error) {
-            utils.ghComment(error.message);
+        utils.ghComment(error.message);
     }
 }
 

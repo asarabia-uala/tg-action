@@ -23,6 +23,8 @@ function ghComment(tgOutput){
         core.setFailed('No pull request found.');
         return;
     }
+
+    tgOutput = formatOutput(tgOutput);
             
     const pull_request_number = context.payload.pull_request.number;
         
