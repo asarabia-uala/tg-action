@@ -9,7 +9,7 @@ try{
     const context = github.context;
     const path = core.getInput('path-to-hcl');
 
-    console.log(context);
+    console.log(context.payload.after);
 
         if(core.getInput('comment') == 'true'){
             switch (context.eventName) {
