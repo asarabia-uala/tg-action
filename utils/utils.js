@@ -44,6 +44,8 @@ function bucketPlan(){
     const credentials = new AWS.SharedIniFileCredentials({profile: prof});
     AWS.config.credentials = credentials;
 
+    const commit = github.context.payload.after;
+
     const s3 = new aws.s3();
     // call S3 to retrieve upload file to specified bucket
     let uploadParams = {Bucket: bucket, Key: '', Body: ''};
