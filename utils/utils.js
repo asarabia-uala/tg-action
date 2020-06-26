@@ -45,13 +45,14 @@ function ghComment(tgOutput){
 
 function bucketPlan(){
     const bucket = core.getInput('uala-terragrunt-pr-action');
+    const path = core.getInput('path-to-hcl');
 
     const commit = github.context.payload.after;
     const pr     = github.context.sha;
 
     // call S3 to retrieve upload file to specified bucket
     let uploadParams = {Bucket: bucket, Key: '', Body: ''};
-    let file = "./tgplan.plan";
+    let file = path+"tgplan.plan";
 
     // Configure the file stream and obtain the upload parameters
     let fileStream = fs.createReadStream(file);
