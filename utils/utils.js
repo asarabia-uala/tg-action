@@ -40,10 +40,11 @@ function ghComment(tgOutput){
 function bucketPlan(){
     const bucket = 'uala-terragrunt-pr-action';
     const path = core.getInput('path-to-hcl');
-    const prof = core.getInput('uala-operaciones');
+    const prof = 'uala-operaciones';
 
     const credentials = new AWS.SharedIniFileCredentials({profile: prof});
     AWS.config.credentials = credentials;
+
     const s3 = new AWS.S3({apiVersion: '2006-03-01'});
 
     const commit = github.context.payload.after;
