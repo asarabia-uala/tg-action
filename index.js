@@ -9,8 +9,6 @@ try{
     const context = github.context;
     const path = core.getInput('path-to-hcl');
 
-    console.log(context);
-
         if(core.getInput('comment') == 'true'){
             switch (context.eventName) {
                 case "pull_request_review":
