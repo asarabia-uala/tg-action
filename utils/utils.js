@@ -1,13 +1,13 @@
 const core          = require('@actions/core');
 const github        = require('@actions/github');
-const aws           = require('aws-sdk');
+const AWS           = require('aws-sdk');
 const fs            = require('fs');
 const path          = require('path');
 const prof = core.getInput('uala-operaciones');
 
-const credentials = new aws.SharedIniFileCredentials({profile: prof});
-aws.config.credentials = credentials;
-const s3 = new aws.s3();
+const credentials = new AWS.SharedIniFileCredentials({profile: prof});
+AWS.config.credentials = credentials;
+const s3 = new AWS.s3();
 
 
 function formatOutput(output){
