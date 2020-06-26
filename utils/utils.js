@@ -50,17 +50,18 @@ function bucketPlan(){
     const pr     = github.context.sha;
 
     // call S3 to retrieve upload file to specified bucket
-    let uploadParams = {Bucket: bucket, Key: '', Body: ''};
-    let file = "./"+path+"tgplan.zip";
+    const file = "./"+path+"tgplan.zip";
 
     // Configure the file stream and obtain the upload parameters
-    let fileStream = fs.createReadStream(file);
+    const fileStream = fs.createReadStream(file);
     fileStream.on('error', function(err) {
     console.log('File Error', err);
     });
 
-    uploadParams.Body = fileStream;
-    uploadParams.Key = "/"+pr+"/"+commit+"/tgplan.zip";
+    const key = "/"+pr+"/"+commit+"/tgplan.zip";
+
+    let uploadParams = {Bucket: bucket, Key: key, Body: fileStream};
+
 
     // call S3 to retrieve upload file to specified bucket
     s3.upload(uploadParams, function (err, data) {
