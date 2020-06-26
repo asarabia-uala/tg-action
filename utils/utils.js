@@ -3,12 +3,6 @@ const github        = require('@actions/github');
 const AWS           = require('aws-sdk');
 const fs            = require('fs');
 const path          = require('path');
-const prof = core.getInput('uala-operaciones');
-
-const credentials = new AWS.SharedIniFileCredentials({profile: prof});
-AWS.config.credentials = credentials;
-const s3 = new AWS.S3();
-
 
 function formatOutput(output){
     output = output.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,'');
@@ -46,6 +40,11 @@ function ghComment(tgOutput){
 function bucketPlan(){
     const bucket = core.getInput('uala-terragrunt-pr-action');
     const path = core.getInput('path-to-hcl');
+    const prof = core.getInput('uala-operaciones');
+    
+    const credentials = new AWS.SharedIniFileCredentials({profile: prof});
+    AWS.config.credentials = credentials;
+    const s3 = new AWS.S3();
 
     const commit = github.context.payload.after;
     const pr     = github.context.sha;
