@@ -52,7 +52,7 @@ function bucketPlan(){
 
     // call S3 to retrieve upload file to specified bucket
     let uploadParams = {Bucket: bucket, Key: '', Body: ''};
-    let file = path+"tgplan.plan";
+    let file = "/"+path+"tgplan.plan";
 
     // Configure the file stream and obtain the upload parameters
     let fileStream = fs.createReadStream(file);
