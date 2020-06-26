@@ -3,6 +3,11 @@ const github        = require('@actions/github');
 const aws           = require('aws-sdk');
 const fs            = require('fs');
 const path          = require('path');
+const prof = core.getInput('uala-operaciones');
+
+const credentials = new aws.SharedIniFileCredentials({profile: prof});
+aws.config.credentials = credentials;
+const s3 = new aws.s3();
 
 
 function formatOutput(output){
@@ -39,15 +44,11 @@ function ghComment(tgOutput){
 }
 
 function bucketPlan(){
-    const prof = core.getInput('uala-operaciones');
     const bucket = core.getInput('uala-terragrunt-pr-action');
-    const credentials = new aws.SharedIniFileCredentials({profile: prof});
-    aws.config.credentials = credentials;
 
     const commit = github.context.payload.after;
     const pr     = github.context.sha;
 
-    const s3 = new aws.s3();
     // call S3 to retrieve upload file to specified bucket
     let uploadParams = {Bucket: bucket, Key: '', Body: ''};
     let file = "tgplan.plan";
