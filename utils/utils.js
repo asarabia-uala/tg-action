@@ -7,7 +7,7 @@ const prof = core.getInput('uala-operaciones');
 
 const credentials = new AWS.SharedIniFileCredentials({profile: prof});
 AWS.config.credentials = credentials;
-const s3 = new AWS.s3();
+const s3 = new AWS.S3();
 
 
 function formatOutput(output){
