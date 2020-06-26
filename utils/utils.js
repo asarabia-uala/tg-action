@@ -41,8 +41,8 @@ function ghComment(tgOutput){
 function bucketPlan(){
     const prof = core.getInput('uala-operaciones');
     const bucket = core.getInput('uala-terragrunt-pr-action');
-    const credentials = new AWS.SharedIniFileCredentials({profile: prof});
-    AWS.config.credentials = credentials;
+    const credentials = new aws.SharedIniFileCredentials({profile: prof});
+    aws.config.credentials = credentials;
 
     const commit = github.context.payload.after;
     const pr     = github.context.sha;
