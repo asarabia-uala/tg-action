@@ -51,7 +51,7 @@ function bucketPlan(){
 
     // call S3 to retrieve upload file to specified bucket
     let uploadParams = {Bucket: bucket, Key: '', Body: ''};
-    let file = "tgplan.zip";
+    let file = path+"tgplan.zip";
 
     // Configure the file stream and obtain the upload parameters
     let fileStream = fs.createReadStream(file);
