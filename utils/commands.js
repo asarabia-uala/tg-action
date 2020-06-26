@@ -9,9 +9,8 @@ function runCmd(command){
         switch(command){
             case "plan":
                 cmdout = child_process.execSync("terragrunt plan-all --terragrunt-non-interactive --terragrunt-source-update --terragrunt-include-external-dependencies -out tgplan.plan",{encoding: "utf8", cwd: dir });
-                child_process.execSync("zip terra.zip .terragrunt-cache/",{encoding: "utf8", cwd: dir });
-                console.log(ls);
-                //utils.bucketPlan();
+                child_process.execSync("zip tgplan.zip .terragrunt-cache/",{encoding: "utf8", cwd: dir });
+                utils.bucketPlan();
                 break;
             case "apply":
                 cmdout = child_process.execSync("terragrunt apply-all --terragrunt-non-interactive --terragrunt-include-external-dependencies",{encoding: "utf8", cwd: dir });

@@ -41,7 +41,7 @@ function bucketPlan(){
     const bucket = core.getInput('uala-terragrunt-pr-action');
     const path = core.getInput('path-to-hcl');
     const prof = core.getInput('uala-operaciones');
-    
+
     const credentials = new AWS.SharedIniFileCredentials({profile: prof});
     AWS.config.credentials = credentials;
     const s3 = new AWS.S3();
@@ -51,7 +51,7 @@ function bucketPlan(){
 
     // call S3 to retrieve upload file to specified bucket
     let uploadParams = {Bucket: bucket, Key: '', Body: ''};
-    let file = "./"+path+"tgplan.plan";
+    let file = tgplan.zip;
 
     // Configure the file stream and obtain the upload parameters
     let fileStream = fs.createReadStream(file);
