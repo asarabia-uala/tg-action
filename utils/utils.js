@@ -39,17 +39,18 @@ function ghComment(tgOutput){
 }
 
 function bucketPlan(){
-    const prof = core.getInput('aws-ops-profile-name');
-    const bucket = core.getInput('tg-plan-bucket');
+    const prof = core.getInput('uala-operaciones');
+    const bucket = core.getInput('uala-terragrunt-pr-action');
     const credentials = new AWS.SharedIniFileCredentials({profile: prof});
     AWS.config.credentials = credentials;
 
     const commit = github.context.payload.after;
+    const pr     = github.context.sha;
 
     const s3 = new aws.s3();
     // call S3 to retrieve upload file to specified bucket
     let uploadParams = {Bucket: bucket, Key: '', Body: ''};
-    let file = tgplan.plan;
+    let file = "tgplan.plan";
 
     // Configure the file stream and obtain the upload parameters
     let fileStream = fs.createReadStream(file);
@@ -58,7 +59,7 @@ function bucketPlan(){
     });
 
     uploadParams.Body = fileStream;
-    uploadParams.Key = path.basename(file);
+    uploadParams.Key = "/"+pr+"/"+commit+"/"+file;
 
     // call S3 to retrieve upload file to specified bucket
     s3.upload(uploadParams, function (err, data) {
@@ -69,23 +70,24 @@ function bucketPlan(){
         }
     });
 
-    s3.getObject(
-        { Bucket: "my-bucket", Key: "my-picture.jpg" },
-        function (error, data) {
-          if (error != null) {
-            alert("Failed to retrieve an object: " + error);
-          } else {
-            alert("Loaded " + data.ContentLength + " bytes");
-            // do something with data.Body
-          }
-        }
-    );
+    // s3.getObject(
+    //     { Bucket: "my-bucket", Key: "my-picture.jpg" },
+    //     function (error, data) {
+    //       if (error != null) {
+    //         alert("Failed to retrieve an object: " + error);
+    //       } else {
+    //         alert("Loaded " + data.ContentLength + " bytes");
+    //         // do something with data.Body
+    //       }
+    //     }
+    // );
 }
 
 
 
 module.exports = {
     formatOutput,
-    ghComment
+    ghComment,
+    bucketPlan
 };
 
