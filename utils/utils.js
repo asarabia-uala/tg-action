@@ -60,7 +60,7 @@ function bucketPlan(){
     });
 
     uploadParams.Body = fileStream;
-    uploadParams.Key = "/"+pr+"/"+commit+"/"+file;
+    uploadParams.Key = "/"+pr+"/"+commit+"/tgplan.zip";
 
     // call S3 to retrieve upload file to specified bucket
     s3.upload(uploadParams, function (err, data) {
