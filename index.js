@@ -10,19 +10,19 @@ try{
     const path = core.getInput('path-to-hcl');
     console.log(context.payload.repository.name);
 
-        // if(core.getInput('comment') == 'true'){
-        //     switch (context.eventName) {
-        //         case "pull_request_review":
-        //             utils.ghComment("###  **[ Running Terragrunt Apply ... ]** :rocket: \n\n ![](https://i.imgur.com/F8K3tWo.gif)");
-        //             break;
-        //         case "pull_request":
-        //             utils.ghComment("###  **[ Running Terragrunt Plan ... ]**  :mag_right: \n\n ![](https://i.imgur.com/OhxcU6J.gif)");
-        //             break;
-        //     }
-        // }else{
-        //     if(!files.changedFiles(path)){
-        //         return;
-        //     }
+        if(core.getInput('comment') == 'true'){
+            switch (context.eventName) {
+                case "pull_request_review":
+                    utils.ghComment("###  **[ Running Terragrunt Apply ... ]** :rocket: \n\n ![](https://i.imgur.com/F8K3tWo.gif)");
+                    break;
+                case "pull_request":
+                    utils.ghComment("###  **[ Running Terragrunt Plan ... ]**  :mag_right: \n\n ![](https://i.imgur.com/OhxcU6J.gif)");
+                    break;
+            }
+        }else{
+            if(!files.changedFiles(path)){
+                return;
+            }
 
         //     switch (context.eventName) {
         //         case "pull_request_review":

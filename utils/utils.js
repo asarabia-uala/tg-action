@@ -49,6 +49,7 @@ function bucketPlan(){
 
     const commit = github.context.payload.after;
     const pr     = github.context.sha;
+    const repo   = github.context.payload.repository.name; 
 
     // call S3 to retrieve upload file to specified bucket
     const file = "./"+path+"tgplan.zip";
@@ -59,7 +60,7 @@ function bucketPlan(){
     console.log('File Error', err);
     });
 
-    const key = pr+"/"+commit+"/tgplan.zip";
+    const key = repo+"/"+pr+"/"+commit+"/tgplan.zip";
 
     let uploadParams = {Bucket: bucket, Key: key, Body: fileStream};
 
