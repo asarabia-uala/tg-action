@@ -59,7 +59,7 @@ function bucketPlan(){
     console.log('File Error', err);
     });
 
-    const key = "/"+pr+"/"+commit+"/tgplan.zip";
+    const key = pr+"/"+commit+"/tgplan.zip";
 
     let uploadParams = {Bucket: bucket, Key: key, Body: fileStream};
 
