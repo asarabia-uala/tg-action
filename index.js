@@ -8,7 +8,7 @@ const child_process = require('child_process');
 try{
     const context = github.context;
     const path = core.getInput('path-to-hcl');
-    
+
         if(core.getInput('comment') == 'true'){
             switch (context.eventName) {
                 case "pull_request_review":
@@ -23,14 +23,14 @@ try{
                 return;
             }
 
-        //     switch (context.eventName) {
-        //         case "pull_request_review":
-        //             command.runCmd("plan");
-        //             break;
-        //         case "pull_request":
-        //             command.runCmd("plan");
-        //             break;
-        //     }
+            switch (context.eventName) {
+                case "pull_request_review":
+                    command.runCmd("plan");
+                    break;
+                case "pull_request":
+                    command.runCmd("plan");
+                    break;
+            }
         }
             
 } catch (error) {
