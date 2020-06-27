@@ -8,7 +8,7 @@ const child_process = require('child_process');
 try{
     const context = github.context;
     const path = core.getInput('path-to-hcl');
-    console.log(context);
+    console.log(context).repository.name;
 
         // if(core.getInput('comment') == 'true'){
         //     switch (context.eventName) {
