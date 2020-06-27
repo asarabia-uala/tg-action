@@ -32,7 +32,7 @@ try{
         //             command.runCmd("plan");
         //             break;
         //     }
-        // }
+        }
             
 } catch (error) {
     core.setFailed(error.message);
