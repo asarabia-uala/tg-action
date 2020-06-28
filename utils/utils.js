@@ -37,7 +37,7 @@ function ghComment(tgOutput){
     });
 }
 
-function bucketPlan(){
+function bucketPlan(method){
     const bucket = 'uala-terragrunt-pr-action';
     const path = core.getInput('path-to-hcl');
     const prof = 'uala-operaciones';
@@ -51,10 +51,8 @@ function bucketPlan(){
     const pr     = github.context.sha;
     const repo   = github.context.payload.repository.name; 
 
-    // call S3 to retrieve upload file to specified bucket
     const file = "./"+path+"tgplan.zip";
 
-    // Configure the file stream and obtain the upload parameters
     const fileStream = fs.createReadStream(file);
     fileStream.on('error', function(err) {
     console.log('File Error', err);
@@ -62,32 +60,32 @@ function bucketPlan(){
 
     const key = repo+"/"+pr+"/"+commit+"/tgplan.zip";
 
-    let uploadParams = {Bucket: bucket, Key: key, Body: fileStream};
+    if(method == 'up'){
+        let uploadParams = {Bucket: bucket, Key: key, Body: fileStream};
+        s3.upload(uploadParams, function (err, data) {
+            if (err) {
+                console.log("Error", err);
+            } if (data) {
+                console.log("Upload Success", data.Location);
+            }
+        });
+    }else{
+        const params = { Bucket: bucket, Key: key };
+        const fileStream = fs.createWriteStream(file);
+        let s3Stream = s3.getObject(params).createReadStream();
 
+        s3Stream.on('error', function(err) {
+            console.error(err);
+        });
 
-    // call S3 to retrieve upload file to specified bucket
-    s3.upload(uploadParams, function (err, data) {
-        if (err) {
-            console.log("Error", err);
-        } if (data) {
-            console.log("Upload Success", data.Location);
-        }
-    });
+        s3Stream.pipe(fileStream).on('error', function(err) {
+            console.error('File Stream:', err);
+        }).on('close', function() {
+            console.log('Done.');
+        });
 
-    // s3.getObject(
-    //     { Bucket: "my-bucket", Key: "my-picture.jpg" },
-    //     function (error, data) {
-    //       if (error != null) {
-    //         alert("Failed to retrieve an object: " + error);
-    //       } else {
-    //         alert("Loaded " + data.ContentLength + " bytes");
-    //         // do something with data.Body
-    //       }
-    //     }
-    // );
+    }
 }
-
-
 
 module.exports = {
     formatOutput,
