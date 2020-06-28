@@ -24,7 +24,7 @@ try{
 
             switch (context.eventName) {
                 case "pull_request_review":
-                    command.runCmd("plan");
+                    command.runCmd("apply");
                     break;
                 case "pull_request":
                     command.runCmd("plan");
