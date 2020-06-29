@@ -55,6 +55,8 @@ async function bucketPlan(method){
 
     const key = repo+"/"+pr+"/"+commit+"/tgplan.zip";
 
+    console.log(key);
+
     if(method == 'up'){
         const fileStream = fs.createReadStream(file);
         fileStream.on('error', function(err) {
