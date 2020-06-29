@@ -14,6 +14,7 @@ async function runCmd(command){
             case "plan":
                 cmdout = child_process.execSync("terragrunt plan-all --terragrunt-non-interactive --terragrunt-source-update --terragrunt-include-external-dependencies -out tgplan.plan",{encoding: "utf8", cwd: dir });
                 child_process.execSync("zip tgplan.zip .terragrunt-cache/",{encoding: "utf8", cwd: dir });
+                await sleep(5000);
                 utils.bucketPlan('up');
                 break;
             case "apply":
