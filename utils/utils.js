@@ -53,8 +53,9 @@ async function bucketPlan(method){
 
     const file = "./"+path+"tgplan.zip";
 
-    const key = repo+"/"+pr+"/"+commit+"/tgplan.zip";
 
+    const key = repo+"/"+pr+"/"+commit+"/tgplan.zip";
+    console.log(github.context);
     console.log(key);
 
     if(method == 'up'){
