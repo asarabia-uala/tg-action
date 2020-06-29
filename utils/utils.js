@@ -78,7 +78,7 @@ async function bucketPlan(method){
             console.error(err);
         });
 
-        s3Stream.pipe(fileStream).on('error', function(err) {
+        await s3Stream.pipe(fileStream).on('error', function(err) {
             console.error('File Stream:', err);
         }).on('close', function() {
             console.log('Done.');
