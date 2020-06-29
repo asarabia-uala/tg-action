@@ -21,8 +21,8 @@ function runCmd(command){
                 break;
         }
 
-        cmdout = utils.formatOutput(cmdout);
-        utils.ghComment(cmdout);
+        // cmdout = utils.formatOutput(cmdout);
+        // utils.ghComment(cmdout);
     }catch (error) {
         core.setFailed(error.message);
         cmdout = utils.formatOutput(error.message);
