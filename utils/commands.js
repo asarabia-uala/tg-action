@@ -2,6 +2,10 @@ const core          = require('@actions/core');
 const child_process = require('child_process');
 const utils         = require('./utils.js');
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 async function runCmd(command){
     const dir = core.getInput('path-to-hcl');
     let cmdout;
@@ -14,9 +18,7 @@ async function runCmd(command){
                 break;
             case "apply":
                 utils.bucketPlan();
-                function sleep(ms) {
-                    return new Promise(resolve => setTimeout(resolve, ms));
-                }
+                
                 await sleep(5000);
                 let ls =child_process.execSync("ls",{encoding: "utf8", cwd: dir });
                 console.log(ls);

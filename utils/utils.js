@@ -37,7 +37,7 @@ function ghComment(tgOutput){
     });
 }
 
-async function bucketPlan(method){
+function bucketPlan(method){
     const bucket = 'uala-terragrunt-pr-action';
     const path = core.getInput('path-to-hcl');
     const prof = 'uala-operaciones';
