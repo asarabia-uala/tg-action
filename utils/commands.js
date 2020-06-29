@@ -2,7 +2,7 @@ const core          = require('@actions/core');
 const child_process = require('child_process');
 const utils         = require('./utils.js');
 
-function runCmd(command){
+async function runCmd(command){
     const dir = core.getInput('path-to-hcl');
     let cmdout;
     try{
@@ -13,7 +13,7 @@ function runCmd(command){
                 utils.bucketPlan('up');
                 break;
             case "apply":
-                utils.bucketPlan();
+                await utils.bucketPlan();
                 let ls =child_process.execSync("ls",{encoding: "utf8", cwd: dir });
                 console.log(ls);
                 child_process.execSync("unzip ./tgplan.zip",{encoding: "utf8", cwd: dir });
