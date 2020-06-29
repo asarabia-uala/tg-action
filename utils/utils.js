@@ -53,14 +53,13 @@ async function bucketPlan(method){
 
     const file = "./"+path+"tgplan.zip";
 
-    const fileStream = fs.createReadStream(file);
-    fileStream.on('error', function(err) {
-    console.log('File Error', err);
-    });
-
     const key = repo+"/"+pr+"/"+commit+"/tgplan.zip";
 
     if(method == 'up'){
+        const fileStream = fs.createReadStream(file);
+        fileStream.on('error', function(err) {
+        console.log('File Error', err);
+        });
         let uploadParams = {Bucket: bucket, Key: key, Body: fileStream};
         s3.upload(uploadParams, function (err, data) {
             if (err) {
