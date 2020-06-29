@@ -68,21 +68,20 @@ async function bucketPlan(method){
                 console.log("Upload Success", data.Location);
             }
         });
-    }else{
-        const params = { Bucket: bucket, Key: key };
-        const fileStream = fs.createWriteStream(file);
-        let s3Stream = await s3.getObject(params).createReadStream();
-
-        s3Stream.on('error', function(err) {
-            console.error(err);
+    }else{        
+        new Promise(function(success, reject) {
+            s3.getObject({ Bucket: bucket, Key: key })
+            .createReadStream()
+            .pipe(fs.createWriteStream(file))
+            .on('close', function () {
+                console.log("sucesfully downloaded");
+                resolve(file)
+            })
+            .on('error', function(err) {
+                console.log(err);
+                reject(error);
+            });
         });
-
-        await s3Stream.pipe(fileStream).on('error', function(err) {
-            console.error('File Stream:', err);
-        }).on('close', function() {
-            console.log('Done.');
-        });
-
     }
 }
 
