@@ -47,16 +47,13 @@ async function bucketPlan(method){
 
     const s3 = new AWS.S3({apiVersion: '2006-03-01'});
 
-    const commit = github.context.payload.after;
-    const pr     = github.context.sha;
-    const repo   = github.context.payload.repository.name; 
+    const sha     = github.context.sha;
+    const repo   = github.context.payload.repository.name;
 
     const file = "./"+path+"tgplan.zip";
 
+    const key = repo+"/"+sha+"/tgplan.zip";
 
-    const key = repo+"/"+pr+"/"+commit+"/tgplan.zip";
-    console.log(github.context);
-    console.log(key);
 
     if(method == 'up'){
         const fileStream = fs.createReadStream(file);
