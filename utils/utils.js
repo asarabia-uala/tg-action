@@ -75,11 +75,9 @@ function bucketPlan(method){
             .pipe(fs.createWriteStream(file))
             .on('close', function () {
                 console.log("sucesfully downloaded");
-                resolve(file)
             })
             .on('error', function(err) {
                 console.log(err);
-                reject(error);
             });
         });
     }
