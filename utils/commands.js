@@ -14,15 +14,13 @@ function runCmd(command){
                 break;
             case "apply":
                 utils.bucketPlan();
-                //child_process.execSync("unzip tgplan.zip",{encoding: "utf8", cwd: dir });
-                let ls = child_process.execSync("ls",{encoding: "utf8", cwd: dir });
-                //cmdout = child_process.execSync("terragrunt apply-all --terragrunt-non-interactive --terragrunt-include-external-dependencies",{encoding: "utf8", cwd: dir });
-                console.log(ls);
+                child_process.execSync("unzip tgplan.zip",{encoding: "utf8", cwd: dir });
+                cmdout = child_process.execSync("terragrunt apply-all --terragrunt-non-interactive --terragrunt-include-external-dependencies",{encoding: "utf8", cwd: dir });
                 break;
         }
 
-        // cmdout = utils.formatOutput(cmdout);
-        // utils.ghComment(cmdout);
+        cmdout = utils.formatOutput(cmdout);
+        utils.ghComment(cmdout);
     }catch (error) {
         core.setFailed(error.message);
         cmdout = utils.formatOutput(error.message);
