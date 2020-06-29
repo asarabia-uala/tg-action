@@ -18,12 +18,13 @@ async function runCmd(command){
                 break;
             case "apply":
                 utils.bucketPlan();
+
+                //await sleep(5000);
                 
-                await sleep(5000);
-                let ls =child_process.execSync("ls",{encoding: "utf8", cwd: dir });
-                console.log(ls);
                 child_process.execSync("unzip tgplan.zip",{encoding: "utf8", cwd: dir });
                 // cmdout = child_process.execSync("terragrunt apply-all --terragrunt-non-interactive --terragrunt-include-external-dependencies",{encoding: "utf8", cwd: dir });
+                let ls =child_process.execSync("ls",{encoding: "utf8", cwd: dir });
+                console.log(ls);
                 break;
         }
 
