@@ -37,7 +37,7 @@ function ghComment(tgOutput){
     });
 }
 
-function bucketPlan(method){
+async function bucketPlan(method){
     const bucket = 'uala-terragrunt-pr-action';
     const path = core.getInput('path-to-hcl');
     const prof = 'uala-operaciones';
@@ -72,7 +72,7 @@ function bucketPlan(method){
     }else{
         const params = { Bucket: bucket, Key: key };
         const fileStream = fs.createWriteStream(file);
-        let s3Stream = s3.getObject(params).createReadStream();
+        let s3Stream = await s3.getObject(params).createReadStream();
 
         s3Stream.on('error', function(err) {
             console.error(err);
