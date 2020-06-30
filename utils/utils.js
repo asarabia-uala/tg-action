@@ -71,12 +71,9 @@ async function bucketPlan(method){
     }else{      
         
         const params = { Bucket: bucket, Key: key};
-        const fileStream = fs.createWriteStream(file);
         const data = await s3.getObject(params).promise();
-        const f = fs.createReadStream(data);
 
-        f.pipe(fileStream);
-        
+        fs.writeFileSync(file, result.Body);
         console.log(`${file} has been created!`);
         
     }
