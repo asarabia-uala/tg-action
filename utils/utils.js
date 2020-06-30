@@ -2,8 +2,7 @@ const core          = require('@actions/core');
 const github        = require('@actions/github');
 const AWS           = require('aws-sdk');
 const fs            = require('fs');
-const child_process = require('child_process');
-
+const path          = require('path');
 
 function formatOutput(output){
     output = output.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,'');
@@ -38,7 +37,7 @@ function ghComment(tgOutput){
     });
 }
 
-function bucketPlan(method){
+async function bucketPlan(method){
     const bucket = 'uala-terragrunt-pr-action';
     const path = core.getInput('path-to-hcl');
     const prof = 'uala-operaciones';
@@ -70,18 +69,16 @@ function bucketPlan(method){
             }
         });
     }else{      
-        return new Promise(function(success, reject) {
-            s3.getObject({ Bucket: bucket, Key: key })
-            .createReadStream()
-            .pipe(fs.createWriteStream(file))
-            .on('close', function () {
-                console.log("sucesfully downloaded");
-                child_process.execSync("unzip tgplan.zip",{encoding: "utf8", cwd: dir });
-            })
-            .on('error', function(err) {
-                console.log(err);
-            });
-        });
+        
+        const params = { Bucket: bucket, Key: key};
+        const fileStream = fs.createWriteStream(file);
+
+        const data = await s3.getObject(params).promise();
+        
+        data.createReadStream().pipe(fileStream);
+
+        console.log(`${file} has been created!`);
+        
     }
 }
 
