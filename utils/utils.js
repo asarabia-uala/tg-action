@@ -56,9 +56,11 @@ function bucketPlan(method){
 
 
     if(method == 'up'){
-        const fileContent = fs.readFileSync(file);
-    
-        let uploadParams = {Bucket: bucket, Key: key, Body: fileContent};
+        const fileStream = fs.createReadStream(file);
+        fileStream.on('error', function(err) {
+        console.log('File Error', err);
+        });
+        let uploadParams = {Bucket: bucket, Key: key, Body: fileStream};
         s3.upload(uploadParams, function (err, data) {
             if (err) {
                 console.log("Error", err);
