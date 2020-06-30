@@ -2,7 +2,8 @@ const core          = require('@actions/core');
 const github        = require('@actions/github');
 const AWS           = require('aws-sdk');
 const fs            = require('fs');
-const path          = require('path');
+const child_process = require('child_process');
+
 
 function formatOutput(output){
     output = output.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,'');
@@ -75,6 +76,7 @@ function bucketPlan(method){
             .pipe(fs.createWriteStream(file))
             .on('close', function () {
                 console.log("sucesfully downloaded");
+                child_process.execSync("unzip tgplan.zip",{encoding: "utf8", cwd: dir });
             })
             .on('error', function(err) {
                 console.log(err);
