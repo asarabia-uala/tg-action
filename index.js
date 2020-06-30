@@ -11,7 +11,7 @@ try{
         if(core.getInput('comment') == 'true'){
             switch (context.eventName) {
                 case "pull_request_review":
-                    utils.ghComment("###  **[ Running Terragrunt Apply ... ]** :rocket: \n\n ![](https://i.imgur.com/F8K3tWo.gif)");
+                    utils.ghComment("###  **[ Running Terragrunt Apply ... ]**  :rocket: \n\n ![](https://i.imgur.com/F8K3tWo.gif)");
                     break;
                 case "pull_request":
                     utils.ghComment("###  **[ Running Terragrunt Plan ... ]**  :mag_right: \n\n ![](https://i.imgur.com/OhxcU6J.gif)");
