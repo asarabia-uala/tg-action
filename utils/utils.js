@@ -68,18 +68,15 @@ function bucketPlan(method){
                 console.log("Upload Success", data.Location);
             }
         });
-    }else{        
-        new Promise(function(success, reject) {
-            s3.getObject({ Bucket: bucket, Key: key })
-            .createReadStream()
-            .pipe(fs.createWriteStream(file))
-            .on('close', function () {
-                console.log("sucesfully downloaded");
-            })
-            .on('error', function(err) {
-                console.log(err);
-            });
-        });
+    }else{      
+        
+        const params = { Bucket: bucket, Key: key};
+
+        s3.getObject(params, (err, data) => {
+            if (err) console.error(err);
+            fs.writeFileSync(file, data.Body.toString());
+            console.log(`${file} has been created!`);
+          });
     }
 }
 
