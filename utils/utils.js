@@ -73,7 +73,7 @@ async function bucketPlan(method){
         const params = { Bucket: bucket, Key: key};
         const data = await s3.getObject(params).promise();
 
-        fs.writeFileSync(file, result.Body);
+        fs.writeFileSync(file, data.Body);
         console.log(`${file} has been created!`);
         
     }
