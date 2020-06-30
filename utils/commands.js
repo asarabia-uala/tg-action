@@ -2,7 +2,7 @@ const core          = require('@actions/core');
 const child_process = require('child_process');
 const utils         = require('./utils.js');
 
-async function runCmd(command){
+function runCmd(command){
     const dir = core.getInput('path-to-hcl');
     let cmdout;
     try{
@@ -13,7 +13,7 @@ async function runCmd(command){
                 utils.bucketPlan('up');
                 break;
             case "apply":
-                await utils.bucketPlan();
+                utils.bucketPlan();
                 child_process.execSync("unzip tgplan.zip",{encoding: "utf8", cwd: dir });
                 cmdout = child_process.execSync("terragrunt apply-all --terragrunt-non-interactive --terragrunt-include-external-dependencies",{encoding: "utf8", cwd: dir });
                 break;
