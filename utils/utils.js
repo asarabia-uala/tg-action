@@ -2,7 +2,6 @@ const core          = require('@actions/core');
 const github        = require('@actions/github');
 const AWS           = require('aws-sdk');
 const fs            = require('fs');
-const path          = require('path');
 
 function formatOutput(output){
     output = output.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,'');
@@ -40,6 +39,14 @@ function ghComment(tgOutput){
 async function bucketPlan(method){
     const bucket = 'uala-terragrunt-pr-action';
     const path = core.getInput('path-to-hcl');
+
+    if( path.charAt(0) != "/"){
+        path = "/"+path;
+    }
+    if(path.charAt(path.length-1) != "/"){
+        path = path+"/";
+    }
+
     const prof = 'uala-operaciones';
 
     const credentials = new AWS.SharedIniFileCredentials({profile: prof});
