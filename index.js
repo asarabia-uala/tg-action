@@ -4,11 +4,13 @@ const github    = require("@actions/github");
 const utils     = require('./utils/utils');
 const files     = require('./utils/changedfiles');
 
+async function run (){
+
 try{
     const context = github.context;
     const path = core.getInput('path-to-hcl');
 
-    console.log(files.changedFiles(path));
+    console.log(await files.changedFiles(path));
     // if(files.changedFiles(path)){
     //     if(core.getInput('comment') == 'true'){
     //         switch (context.eventName) {
@@ -38,3 +40,6 @@ try{
     utils.ghComment(cmdout);
 }
 
+}
+
+run();
