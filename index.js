@@ -7,7 +7,7 @@ const files     = require('./utils/changedfiles');
 try{
     const context = github.context;
     const path = core.getInput('path-to-hcl');
-
+    if(files.changedFiles(path)){
         if(core.getInput('comment') == 'true'){
             switch (context.eventName) {
                 case "pull_request_review":
@@ -18,19 +18,17 @@ try{
                     break;
             }
         }else{
-            if(!files.changedFiles(path)){
-                return;
-            }
-
-            switch (context.eventName) {
-                case "pull_request_review":
-                    command.runCmd("apply");
-                    break;
-                case "pull_request":
-                    command.runCmd("plan");
-                    break;
-            }
+            
+                switch (context.eventName) {
+                    case "pull_request_review":
+                        command.runCmd("apply");
+                        break;
+                    case "pull_request":
+                        command.runCmd("plan");
+                        break;
+                }
         }
+    }
             
 } catch (error) {
     core.setFailed(error.message);

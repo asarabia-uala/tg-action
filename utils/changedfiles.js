@@ -70,7 +70,7 @@ async function changedFiles(path){
         .then(data => Promise.all(data.map(processCommitData)))
         .then(outputResults)
 		.catch(err => core.error(err) && (process.exitCode = 1));
-   
+				
         return chDirs.includes(String(path));
 }
   
