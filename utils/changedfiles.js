@@ -51,12 +51,15 @@ function processCommitData(result) {
 	});
 }
 
-function splitPath(path) {
-    var result = path.replace(/\\/g, "/").match(/(.*\/)?(\..*?|.*?)(\.[^.]*?)?(#.*$|\?.*$|$)/);
+function splitPath(p) {
+    var result = p.replace(/\\/g, "/").match(/(.*\/)?(\..*?|.*?)(\.[^.]*?)?(#.*$|\?.*$|$)/);
     return result[1];
 }
 
 async function changedFiles(path){
+	if(path.charAt(path.length-1) != "/"){
+        path = path+"/";
+    }
 
     let commits = await getCommits();
     // Exclude merge commits

@@ -40,9 +40,6 @@ async function bucketPlan(method){
     const bucket = 'uala-terragrunt-pr-action';
     const path = core.getInput('path-to-hcl');
 
-    if( path.charAt(0) != "/"){
-        path = "/"+path;
-    }
     if(path.charAt(path.length-1) != "/"){
         path = path+"/";
     }
