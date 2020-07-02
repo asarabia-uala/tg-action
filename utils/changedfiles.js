@@ -74,8 +74,8 @@ async function changedFiles(path){
         .then(outputResults)
 		.catch(err => core.error(err) && (process.exitCode = 1));
 				
-		//return chDirs.includes(String(path));
-		return chDirs;
+		return chDirs.includes(String(path));
+		
 }
   
 module.exports = {
