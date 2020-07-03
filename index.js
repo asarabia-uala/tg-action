@@ -9,6 +9,7 @@ async function run (){
 try{
     const context = github.context;
     const path = core.getInput('path-to-hcl');
+    console.log(context);
     console.log(await files.changedFiles(path));
 //     if(await files.changedFiles(path)){
 //         if(core.getInput('comment') == 'true'){
