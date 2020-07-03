@@ -23,13 +23,13 @@ async function getCommits() {
 		break;
 
 		case 'pull_request':
-			const url = context.payload.pull_request.commits_url;
-            commits = await gh.paginate(`GET ${url}`, args);
+			const purl = context.payload.pull_request.commits_url;
+            commits = await gh.paginate(`GET ${purl}`, args);
 		break;
 
 		case 'pull_request_review':
-			const url = context.payload.pull_request.commits_url;
-            commits = await gh.paginate(`GET ${url}`, args);
+			const pwurl = context.payload.pull_request.commits_url;
+            commits = await gh.paginate(`GET ${pwurl}`, args);
 		break;
 
 		default:
