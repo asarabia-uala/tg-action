@@ -27,7 +27,7 @@ async function getCommits() {
             commits = await gh.paginate(`GET ${url}`, args);
 		break;
 
-		case 'pull_request':
+		case 'pull_request_review':
 			const url = context.payload.pull_request.commits_url;
             commits = await gh.paginate(`GET ${url}`, args);
 		break;
